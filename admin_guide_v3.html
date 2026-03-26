@@ -55,6 +55,34 @@ body{background:var(--bg);font-family:-apple-system,'PingFang SC','Helvetica Neu
 .page-hd h2{font-size:1.9em;font-weight:900;letter-spacing:-.04em;line-height:1.2}
 .page-hd-bar{width:40px;height:3px;background:var(--brand);border-radius:3px;margin-top:2px}
 
+/* ── Welcome banner ── */
+.welcome-banner{background:linear-gradient(135deg,#eef2ff 0%,#f0fdf4 100%);border:1px solid var(--brand-border);border-radius:18px;padding:22px 26px;margin-bottom:28px}
+.wb-title{font-size:1.05em;font-weight:800;color:var(--brand);margin-bottom:6px}
+.wb-desc{font-size:.83em;color:var(--text-2);line-height:1.8}
+
+/* ── Scenario block ── */
+.scenario-block{background:var(--white);border-radius:20px;border:1px solid var(--border);overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.04);margin-bottom:18px}
+.sb-question{padding:16px 22px;background:var(--brand-bg);border-bottom:1px solid var(--brand-border);display:flex;align-items:center;gap:10px}
+.sb-q-icon{font-size:18px;flex-shrink:0}
+.sb-q-text{font-weight:800;font-size:.92em;color:#3730a3;line-height:1.4}
+.sb-answer{padding:18px 22px}
+.sb-tip{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:11px;padding:11px 14px;margin-bottom:14px;font-size:.81em;color:#166534;line-height:1.7;white-space:pre-wrap}
+.sb-tip-warn{background:#fffbeb;border:1px solid #fde68a;border-radius:11px;padding:11px 14px;margin-bottom:14px;font-size:.81em;color:#92400e;line-height:1.7;white-space:pre-wrap}
+
+/* ── Step list ── */
+.step-list{list-style:none;margin-bottom:14px}
+.step-item{display:flex;align-items:flex-start;gap:12px;padding:9px 0;border-bottom:1px solid #f1f5f9;font-size:.83em;color:var(--text-2);line-height:1.6}
+.step-item:last-child{border-bottom:none}
+.step-num{width:22px;height:22px;background:var(--brand);color:white;border-radius:50%;font-size:.72em;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.step-body{flex:1}
+.step-body strong{color:var(--text);font-weight:700}
+.step-body a{color:var(--brand);text-decoration:none;font-weight:600}
+.step-body a:hover{text-decoration:none;opacity:.8}
+.sb-tip a{color:inherit;text-decoration:none;font-weight:600;border-bottom:1px solid currentColor;opacity:.85}
+.sb-tip a:hover{opacity:1}
+.sb-tip-warn a{color:inherit;text-decoration:none;font-weight:600;border-bottom:1px solid currentColor;opacity:.85}
+.sb-tip-warn a:hover{opacity:1}
+
 /* ── Block ── */
 .block{margin-bottom:28px}
 .block-label{display:flex;align-items:center;gap:7px;font-size:.7em;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--text-3);margin-bottom:12px}
@@ -108,6 +136,29 @@ body{background:var(--bg);font-family:-apple-system,'PingFang SC','Helvetica Neu
 .note-title{font-size:.7em;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#b45309;margin-bottom:9px;display:flex;align-items:center;gap:5px}
 .note-row{font-size:.79em;color:#78350f;line-height:1.9;padding:1px 0;border-bottom:1px dashed #fde68a}
 .note-row:last-child{border-bottom:none}
+
+/* ── Role Picker (差旅身份选择) ── */
+.role-picker{display:flex;gap:10px;margin-bottom:22px;background:#f8fafc;border:1px solid var(--border);border-radius:16px;padding:10px}
+.role-btn{flex:1;padding:14px 10px;border-radius:12px;font-size:.84em;font-weight:700;cursor:pointer;border:1.5px solid transparent;background:transparent;color:var(--text-2);transition:all .18s;text-align:center;line-height:1.4}
+.role-btn .rb-icon{display:block;font-size:22px;margin-bottom:4px}
+.role-btn .rb-label{display:block}
+.role-btn .rb-sub{display:block;font-size:.75em;font-weight:500;color:var(--text-3);margin-top:2px}
+.role-btn.active-cn{background:#fff7ed;color:#c2410c;border-color:#fed7aa}
+.role-btn.active-global{background:#eff6ff;color:#1d4ed8;border-color:#bfdbfe}
+.role-btn:hover:not(.active-cn):not(.active-global){background:var(--white);border-color:var(--border);color:var(--text)}
+.role-panel{display:none}
+.role-panel.visible{display:block}
+.role-hint{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:11px;padding:11px 14px;margin-bottom:16px;font-size:.81em;color:#166534;line-height:1.7}
+
+/* ── Region subsection (Global 报销) ── */
+.region-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+@media(max-width:580px){.region-grid{grid-template-columns:1fr}}
+.region-card{display:flex;flex-direction:column;background:var(--white);border:1px solid var(--border);border-radius:13px;padding:14px 16px;text-decoration:none;color:var(--text);font-size:.82em;transition:all .16s}
+.region-card:hover{border-color:var(--brand-border);box-shadow:0 3px 12px rgba(79,70,229,.1)}
+.region-card .rc-region{font-weight:800;color:var(--brand);margin-bottom:4px}
+.region-card .rc-name{font-size:.88em;color:var(--text-2);font-weight:500}
+.region-card .rc-arr{margin-top:8px;font-size:11px;color:var(--text-3)}
+.region-card:hover .rc-arr{color:var(--brand)}
 
 /* ── Mobile ── */
 .mob-bar{display:none;position:fixed;top:0;left:0;right:0;height:54px;background:var(--white);border-bottom:1px solid var(--border);z-index:20;padding:0 16px;align-items:center;justify-content:space-between}
@@ -173,74 +224,84 @@ var SECTIONS = [
     icon: '🏙️',
     zh: { title: '云海3栋职场' },
     en: { title: 'Yunhai Tower 3' },
+    welcome: {
+      zh: { title: '👋 欢迎来到云海3栋！', desc: '新同学别慌，这里汇总了职场相关的常用指引。坐好了，开始吧～' },
+      en: { title: '👋 Welcome to Yunhai Tower 3!', desc: 'New here? Don\'t sweat it — everything you need to get around is right here.' }
+    },
     highlight: {
       icon: '🐧',
-      zh: { title: '企鹅岛周边指引', sub: '周边生活 · 餐饮住宿 · 休闲团建' },
-      en: { title: 'Penguin Island Guide', sub: 'Local Life · Dining · Team Building' },
+      zh: { title: '企鹅岛周边指引', sub: '周边餐饮 · 住宿 · 休闲团建，一站搞定 →' },
+      en: { title: 'Penguin Island Neighborhood Guide', sub: 'Dining · Stays · Team Activities, all in one place →' },
       url: 'https://ieggpenguin.github.io/Penguin_home/'
     },
-    subsections: [
+    scenarios: [
       {
-        zh: { title: '交通指引' }, en: { title: 'Getting Around' },
-        items: [
-          { type:'text', zh:'小程序：腾讯巴士', en:'Mini Program: Tencent Bus' },
-          { type:'text', zh:'小程序：腾讯穿梭接驳', en:'Mini Program: Tencent Shuttle' },
-          { type:'link', zh:'夜间打车报销 — 闪电报操作指引', en:'Late-Night Taxi Reimbursement — Shandian Guide', url:'https://iwiki.woa.com/p/4011988219' },
+        q: { zh: '🚌 我想坐班车 / 打车回家，怎么操作？', en: '🚌 How do I take the shuttle bus or get a taxi home?' },
+        steps: [
+          { zh: '班车乘坐：打开微信，搜索小程序 <strong>「腾讯巴士」</strong>，查看班次和路线，上车扫码即可', en: 'Shuttle bus: Open WeChat, search mini program <strong>"Tencent Bus"</strong>, browse schedules and routes, scan to board.' },
+          { zh: '接驳车乘坐：微信搜索小程序 <strong>「腾讯穿梭接驳」</strong>，预约或实时查看发车时间', en: 'Shuttle transfer: WeChat mini program <strong>"Tencent Shuttle"</strong>, book or check real-time departures.' },
+          { zh: '夜间打车报销：加班打车的费用可以走报销，操作指引见 → <a href="https://iwiki.woa.com/p/4011988219" target="_blank">夜间打车报销操作指引</a>', en: 'Late-night taxi reimbursement: Overtime taxi costs can be reimbursed. See guide → <a href="https://iwiki.woa.com/p/4011988219" target="_blank">Late-Night Taxi Reimbursement Guide</a>' },
         ]
       },
       {
-        zh: { title: '物业指引' }, en: { title: 'Property Services' },
-        items: [
-          { type:'text', zh:'前台接待：企业微信「云海-前台接待」（云海3栋）', en:'Reception: WeCom "Yunhai-Reception" (Tower 3)' },
-          { type:'text', zh:'邮件中心：企业微信「云海3栋邮件中心」', en:'Mail Center: WeCom "Yunhai Tower 3 Mail Center"' },
+        q: { zh: '📮 我有快递 / 邮件，去哪里取或寄？', en: '📮 Where do I pick up or send parcels and mail?' },
+        steps: [
+          { zh: '收发快递：联系企业微信 <strong>「云海3栋邮件中心」</strong>，会告诉你包裹在哪、怎么取', en: 'Parcels & mail: Contact WeCom <strong>"Yunhai Tower 3 Mail Center"</strong> — they\'ll tell you where your parcel is and how to collect it.' },
+          { zh: '前台有问题也可以直接找：企业微信 <strong>「云海-前台接待」</strong>（云海3栋）', en: 'Front desk for general questions: WeCom <strong>"Yunhai-Reception" (Tower 3)</strong>.' },
         ]
       },
       {
-        zh: { title: '会务支持' }, en: { title: 'Meeting Services' },
-        items: [
-          { type:'link', zh:'会议室预约', en:'Book a Meeting Room', url:'https://meeting.woa.com' },
-          { type:'text', zh:'会务服务：企业微信「云海-会议接待1」', en:'Meeting Support: WeCom "Yunhai-Meeting Reception 1"' },
+        q: { zh: '📅 我想预约会议室，怎么订？', en: '📅 How do I book a meeting room?' },
+        steps: [
+          { zh: '直接打开会议室预约系统：<a href="https://meeting.woa.com" target="_blank">meeting.woa.com</a>，选好时间和人数预约即可', en: 'Go to the booking system: <a href="https://meeting.woa.com" target="_blank">meeting.woa.com</a> — pick a time, room size, and book.' },
+          { zh: '需要会务服务（茶歇、设备支持等）：联系企业微信 <strong>「云海-会议接待1」</strong>', en: 'Need meeting services (refreshments, AV support, etc.): WeCom <strong>"Yunhai-Meeting Reception 1"</strong>.' },
         ]
       },
       {
-        zh: { title: '工卡' }, en: { title: 'Access Cards' },
-        items: [
-          { type:'text', zh:'员工忘带工卡：访客机领用临时工卡\n小程序：腾讯电子工卡', en:'Forgot Card: Pick up temp card at visitor kiosk\nMini Program: Tencent Digital Card' },
-          { type:'text', zh:'外来访客：访客机领用访客码\n小程序：腾讯访客', en:'Visitors: Get visitor QR at kiosk\nMini Program: Tencent Visitor' },
-          { type:'text', zh:'海外员工阶段性国内办公：前台访客机申请临时工卡，现场领取', en:'Overseas staff (temp CN office): Apply for temp card at front desk kiosk' },
+        q: { zh: '🪪 我忘带工卡了，怎么进楼？', en: '🪪 I forgot my access card — how do I get in?' },
+        steps: [
+          { zh: '<strong>忘带工卡：</strong>走到前台旁边的访客机，申请领取临时工卡，当场领走就能用', en: '<strong>Forgot card:</strong> Head to the visitor kiosk near reception, apply for a temp card, and use it right away.' },
+          { zh: '或者更方便：微信搜索小程序 <strong>「腾讯电子工卡」</strong>，手机代替实体卡进出', en: 'Or use your phone: WeChat mini program <strong>"Tencent Digital Card"</strong> — no physical card needed.' },
+          { zh: '<strong>接待外部访客：</strong>访客在访客机自助领取访客码，或微信搜 <strong>「腾讯访客」</strong>小程序提前预约', en: '<strong>Hosting external visitors:</strong> Visitors get a QR at the kiosk, or pre-register via WeChat mini program <strong>"Tencent Visitor"</strong>.' },
+          { zh: '<strong>海外同事临时来国内办公：</strong>前往前台访客机申请临时工卡，现场领取使用', en: '<strong>Overseas staff on temp CN assignment:</strong> Apply for a temporary access card at the front desk kiosk, collect on-site.' },
         ]
       },
     ]
   },
 
-  /* 2. 财经系统 (含报销 + 差旅) */
+  /* 2. 财经系统 */
   {
     id: 'finance',
     icon: '💰',
     zh: { title: '财经系统' },
     en: { title: 'Finance' },
+    welcome: {
+      zh: { title: '💰 报销、差旅，找对人就不难', desc: '不管是报销还是出差，先确认好找谁，再按步骤来，基本上不会卡住。' },
+      en: { title: '💰 Reimbursements & Business Travel — Know Who to Call', desc: 'Whether it\'s expenses or travel, finding the right contact first makes everything smooth.' }
+    },
     contacts: [
       {
-        zh: { name: '连线财经1-8003（对外付款）', desc: '企业微信搜索「连线财经1-8003」\n\n合同盖章 / 其他业务用章相关流程；合同交取 / 归档 / 借阅；印章所在地点查询；凭证借阅流程' },
-        en: { name: 'Finance 1 - 8003 (External Payment)', desc: 'WeCom: "Lianjie Finance 1-8003"\n\nContract stamping, filing, archival, retrieval; seal location queries; voucher borrowing.' },
+        zh: { name: '连线财经1-8003（合同 / 用章 / 凭证）', desc: '企业微信搜索「连线财经1-8003」\n\n📌 适用场景：需要合同盖章、合同交取 / 归档 / 借阅、查询印章所在地、凭证借阅' },
+        en: { name: 'Finance 1-8003 (Contracts / Seals / Vouchers)', desc: 'WeCom: "Lianjie Finance 1-8003"\n\n📌 Use for: Contract stamping, filing, archival & retrieval; seal location queries; voucher borrowing.' },
       },
       {
-        zh: { name: '连线财经3-8003（报销）', desc: '企业微信搜索「连线财经3-8003」\n\n报销提单前请先联系小T确认签约主体，填写对应发票抬头' },
-        en: { name: 'Finance 3 - 8003 (Reimbursement)', desc: 'WeCom: "Lianjie Finance 3-8003"\n\nBefore submitting, confirm legal entity with 小T and use the correct invoice header.' },
+        zh: { name: '连线财经3-8003（报销专线）', desc: '企业微信搜索「连线财经3-8003」\n\n📌 适用场景：报销问题咨询、提单前确认签约主体\n⚠️ 提报销单之前，记得先联系小T确认签约主体，填正确的发票抬头，避免退单！' },
+        en: { name: 'Finance 3-8003 (Reimbursement Hotline)', desc: 'WeCom: "Lianjie Finance 3-8003"\n\n📌 Use for: Reimbursement questions, confirming legal entity before submission\n⚠️ Before submitting, confirm entity with 小T and use the correct invoice header to avoid rejections!' },
       }
     ],
-    subsections: [
+    scenarios: [
       {
-        zh: { title: '报销' }, en: { title: 'Reimbursement' },
-        links: [
-          { zh:'8003 知识库（报销）', en:'8003 Knowledge Base (Reimbursement)', url:'https://iwiki.woa.com/space/8003' },
-          { zh:'财经报销平台', en:'Finance Reimbursement Platform', url:'https://cost.woa.com/#/new/home' },
-          { zh:'财经报销平台提单指引', en:'Reimbursement Submission Guide', url:'https://km.woa.com/group/19791/articles/show/493022' },
-          { zh:'经费管理系统', en:'Budget Management System', url:'https://fund.woa.com/home/homePage' },
+        q: { zh: '🧾 我想提报销单，应该怎么做？', en: '🧾 How do I submit a reimbursement claim?' },
+        steps: [
+          { zh: '<strong>第一步：确认发票抬头</strong> — 先联系 HR 小T，确认你的签约主体（不同主体对应不同发票抬头，填错了会被退单）', en: '<strong>Step 1: Confirm invoice entity</strong> — Contact HR 小T first to confirm your legal entity (wrong header = rejected claim).' },
+          { zh: '<strong>第二步：开具正确发票</strong> — 根据小T给的信息，让供应商/商家开对应抬头的发票', en: '<strong>Step 2: Get the right invoice</strong> — Ask the vendor to issue an invoice with the confirmed header.' },
+          { zh: '<strong>第三步：登录报销平台提单</strong> — <a href="https://cost.woa.com/#/new/home" target="_blank">财经报销平台</a>，填写信息并上传发票', en: '<strong>Step 3: Submit on the platform</strong> — Log in to the <a href="https://cost.woa.com/#/new/home" target="_blank">Reimbursement Platform</a>, fill in details and upload your invoice.' },
+          { zh: '不确定怎么填？参考 → <a href="https://km.woa.com/group/19791/articles/show/493022" target="_blank">财经报销平台提单指引</a>，或直接问「连线财经3-8003」', en: 'Not sure how to fill it in? See → <a href="https://km.woa.com/group/19791/articles/show/493022" target="_blank">Reimbursement Submission Guide</a>, or ask Finance 3-8003.' },
+          { zh: '预算查询：<a href="https://fund.woa.com/home/homePage" target="_blank">经费管理系统</a> 可以看自己的可用预算', en: 'Check your budget: <a href="https://fund.woa.com/home/homePage" target="_blank">Budget Management System</a>.' },
         ],
         note: {
-          zh: { title: '🧾 发票信息', hint: '请先联系小T确认签约主体，填写对应发票抬头' },
-          en: { title: '🧾 Invoice Info', hint: 'Confirm legal entity with 小T before filling in invoice header.' },
+          zh: '📋 三个常用发票抬头（提单前确认用哪个）',
+          en: '📋 Three common invoice headers (confirm which one applies before submitting)',
           rows: [
             '腾讯科技（深圳）有限公司　｜　税号：9144030071526726XG',
             '比邻星科技（深圳）有限公司　｜　税号：91440300MA5GG16Y7K',
@@ -249,17 +310,73 @@ var SECTIONS = [
         }
       },
       {
-        zh: { title: '差旅' }, en: { title: 'Business Travel' },
-        links: [
-          { zh:'差旅行程计划单填写', en:'Travel Plan Form', url:'https://trip.woa.com/plan/web/#/Home' },
-          { zh:'差旅机酒预订', en:'Book Flights & Hotels', url:'https://trip.woa.com/#/home' },
-          { zh:'海外职能平台接口人（2025更新）', en:'Global Function POC List (2025)', url:'https://doc.weixin.qq.com/sheet/e3_AFIACAapAAsCNdBMo00t4SH2WEUHe?scode=AJEAIQdfAAodfCu1UPAFIACAapAAs&tab=BB08J2' },
-          {
-            zh:'差旅报销细则', en:'Tencent Global Travel & Business Expense Policy',
-            url_zh:'https://policy.woa.com/document/preview?documentId=3bc45cd43d9c40d4ba2aa1200d4dba1e&f=2',
-            url_en:'https://iwiki.woa.com/p/1904122660'
+        q: { zh: '✈️ 我要出差，机票酒店怎么订？行程怎么走？', en: '✈️ Business trip — flights, hotels, and reimbursement?' },
+        rolePickerScenario: true,
+        // CN domestic/outbound travel (国内同事)
+        cn: {
+          hint: { zh: '以下为中国大陆同事的出差指引（境内 & 境外都适用）', en: 'Travel guide for China-based colleagues (domestic & overseas trips).' },
+          steps: [
+            { zh: '<strong>第一步：提交差旅计划单</strong> — 出发前必须在 <a href="https://trip.woa.com/plan/web/#/Home" target="_blank">差旅计划平台</a> 提交差旅计划，系统审批结束后再预订具体行程。国内出差超过三天请提前同步 Leader 并获得同意', en: '<strong>Step 1: Submit a Travel Plan</strong> — Submit via the <a href="https://trip.woa.com/plan/web/#/Home" target="_blank">Travel Plan Platform</a> before departure and wait for system approval before booking. For domestic trips over 3 days, sync with your Leader first.' },
+            { zh: '<strong>第二步：预订机票 / 酒店 / 火车票</strong> — 通过 <a href="https://trip.woa.com/#/home" target="_blank">月结平台</a> 预订，无需垫付，走公司协议价，省钱又合规', en: '<strong>Step 2: Book flights / hotels / trains</strong> — Book via the <a href="https://trip.woa.com/#/home" target="_blank">monthly billing platform</a>. No upfront payment needed; corporate rates apply.' },
+            { zh: '<strong>第三步：差旅结束后报销</strong> — 登录 <a href="https://trip.woa.com/#/home" target="_blank">差旅平台</a> 进行行程确认及报销。如有超计划费用或异常大额费用，请备注说明原因', en: '<strong>Step 3: File your reimbursement</strong> — Log in to the <a href="https://trip.woa.com/#/home" target="_blank">Travel Platform</a> to confirm your itinerary and submit expenses. Add a note for any costs exceeding the plan or unusually high amounts.' },
+          ],
+          travelNotes: {
+            zh: '📋 <strong>差旅须知</strong><br>① 费用须在发生后 <strong>30 日内</strong>提交报销，逾期超过一年则无法报销<br>② 所有报销须附足额、合法发票/收据，抬头需与签约机构全称一致（查询方式：TencentHome 小程序 → 搜索"发票抬头"）<br>③ 国内出差超三天，提交差旅单前请提前同步 Leader 并获同意<br>④ 差旅改签金额较大，请提前同步 Leader，并在改签页面备注改签原因<br>⑤ 特殊情况需升舱且需全额报销，须 SEVP 和 CFO 邮件审批，报销时将审批邮件上传至单据附件',
+            en: '📋 <strong>Travel Notes</strong><br>① Expenses must be submitted for reimbursement within <strong>30 days</strong> of occurrence; claims over one year old cannot be processed.<br>② All reimbursements require valid invoices/receipts with the full legal entity name as header (check via TencentHome mini-program → search "invoice header").<br>③ For domestic trips over 3 days, sync with your Leader before submitting the travel plan.<br>④ For significant rebooking fees, sync with your Leader first and add a note on the rebooking page.<br>⑤ Special upgrades requiring full reimbursement need SEVP and CFO email approval; attach the approval email when submitting.'
           },
-          { zh:'公司签证办理申请', en:'Company Visa Application', url:'http://admflow.oa.com/visaapply' },
+          visaNote: {
+            zh: '🛂 <strong>出境签证</strong> — 出境出差须根据目的地国家的法律法规办理有效的商务签证，请提前做好准备：<br>· <a href="http://admflow.oa.com/visaapply" target="_blank">公司签证办理申请平台</a><br>· <a href="https://doc.weixin.qq.com/sheet/e3_AKQAJAZaACo5V0cnCO8QU2xtDZqL0?scode=AJEAIQdfAAo3nRCSUAAWsASgboAIE&tab=BB08J2" target="_blank">差旅政策速查表</a>（免签国家、签证要求、各国政策一览）<br>· <a href="https://doc.weixin.qq.com/sheet/e3_ASUA8wZZAEIQGPwiAcUQbKMoSM5qD?scode=AJEAIQdfAAojoB5rEfAWsASgboAIE&tab=81k120" target="_blank">海外工作签证联系人</a><br>· <a href="https://doc.weixin.qq.com/sheet/e3_ASQAcwZSAGgj750qNfhRMyUNJtmo2?scode=AJEAIQdfAAovzswjhoASQAcwZSAGg&tab=fdx06w5" target="_blank">签证相关表格</a><br>· 👉 内地员工出国境（商务签证）：<strong>v_hlhzzhang（张欢）856295</strong><br>· ⚠️ <strong>邀请函</strong>由实际邀请方 / 对接人 / 秘书开具，有模板参考，按领馆要求完善后自行申请盖章',
+            en: '🛂 <strong>Visa for Overseas Trips</strong> — A valid business visa is required for overseas travel in accordance with the destination country\'s laws and regulations. Plan ahead:<br>· <a href="http://admflow.oa.com/visaapply" target="_blank">Company Visa Application Platform</a><br>· <a href="https://doc.weixin.qq.com/sheet/e3_AKQAJAZaACo5V0cnCO8QU2xtDZqL0?scode=AJEAIQdfAAo3nRCSUAAWsASgboAIE&tab=BB08J2" target="_blank">Travel Policy Quick Reference</a> (visa-free countries, requirements, country policies)<br>· <a href="https://doc.weixin.qq.com/sheet/e3_ASUA8wZZAEIQGPwiAcUQbKMoSM5qD?scode=AJEAIQdfAAojoB5rEfAWsASgboAIE&tab=81k120" target="_blank">Work Visa Contacts</a><br>· <a href="https://doc.weixin.qq.com/sheet/e3_ASQAcwZSAGgj750qNfhRMyUNJtmo2?scode=AJEAIQdfAAovzswjhoASQAcwZSAGg&tab=fdx06w5" target="_blank">Visa Reference Sheet</a><br>· 👉 Mainland employees traveling abroad (business visa): <strong>v_hlhzzhang (Zhang Huan) 856295</strong><br>· ⚠️ <strong>Invitation letters</strong> are issued by the actual inviting party / POC / secretary. A template is available — complete per consulate requirements, then get it stamped.'
+          },
+          outboundNote: {
+            zh: '🌍 <strong>其他出境资源</strong><br>· <a href="https://doc.weixin.qq.com/doc/w3_AKQAJAZaACoUmv17X1qSceyX5NQrp?scode=AJEAIQdfAAoI6Vh6JEAWsASgboAIE" target="_blank">海外差旅支持手册</a><br>· <a href="https://doc.weixin.qq.com/sheet/e3_AKQAJAZaACo2wyeO0GmQv6WtY9w4N?scode=AJEAIQdfAAoWcz4lIeAWsASgboAIE&tab=BB08J2" target="_blank">海外办公室资讯</a><br>· <a href="https://doc.weixin.qq.com/sheet/e3_AFIACAapAAsCNdBMo00t4SH2WEUHe?scode=AJEAIQdfAAodfCu1UPAFIACAapAAs&tab=BB08J2" target="_blank">全球职能平台接口人列表</a>',
+            en: '🌍 <strong>Other overseas resources</strong><br>· <a href="https://doc.weixin.qq.com/doc/w3_AKQAJAZaACoUmv17X1qSceyX5NQrp?scode=AJEAIQdfAAoI6Vh6JEAWsASgboAIE" target="_blank">Overseas Travel Support Manual</a><br>· <a href="https://doc.weixin.qq.com/sheet/e3_AKQAJAZaACo2wyeO0GmQv6WtY9w4N?scode=AJEAIQdfAAoWcz4lIeAWsASgboAIE&tab=BB08J2" target="_blank">Overseas Office Info</a><br>· <a href="https://doc.weixin.qq.com/sheet/e3_AFIACAapAAsCNdBMo00t4SH2WEUHe?scode=AJEAIQdfAAodfCu1UPAFIACAapAAs&tab=BB08J2" target="_blank">Global Function POC List</a>'
+          }
+        },
+        // Global colleagues travel
+        global: {
+          hint: { zh: '以下为 Global 海外同事的出差指引，出差前请务必提前向 GM 发送邮件审批', en: 'Travel guide for Global colleagues. Trips must be approved by GM via email in advance.' },
+          steps: [
+            { zh: '<strong>出发前：邮件申请 GM 审批</strong> — 在开始预订之前，需通过邮件向 GM 提前申请出差审批。邮件中请写明：出差时间、行程事项、费用标准内的预计金额，以及本次出差对应的工作项目或业务目的', en: '<strong>Before you go: Get GM approval by email</strong> — Before booking anything, send an email to your GM requesting travel approval. Include: travel dates, purpose and itinerary, estimated costs within policy limits, and the project or business objective this trip supports.' },
+            { zh: '<strong>预订机票 & 酒店</strong> — 通过所在地区的预订平台预订', en: '<strong>Book flights & hotels</strong> — via your regional booking platform:' },
+          ],
+          bookingRegions: {
+            note: { zh: '预订操作参考：<a href="https://iwiki.woa.com/pages/viewpage.action?pageId=4008332412" target="_blank">境内酒店</a> · <a href="https://iwiki.woa.com/pages/viewpage.action?pageId=4007719544" target="_blank">境外酒店</a>', en: 'Booking guides: <a href="https://iwiki.woa.com/pages/viewpage.action?pageId=4008332412" target="_blank">Domestic hotels</a> · <a href="https://iwiki.woa.com/pages/viewpage.action?pageId=4007719544" target="_blank">Overseas hotels</a>' },
+            items: [
+              { region: 'HQ', url: 'https://trip.woa.com/', label: 'trip.woa.com' },
+              { region: 'Asia-Pacific', url: 'https://ap-fm.woa.com/', label: 'ap-fm.woa.com' },
+              { region: 'Europe', url: 'https://eu-fm.woa.com/', label: 'eu-fm.woa.com' },
+              { region: 'North America', url: 'https://na-fm.woa.com/', label: 'na-fm.woa.com' },
+            ]
+          },
+          stepsAfterBooking: [
+            { zh: '<strong>其他费用报销</strong>（如有垫付费用）— 通过所在地区的报销系统提单', en: '<strong>Expense reimbursement</strong> (for any out-of-pocket costs) — submit via your regional expense platform:' },
+          ],
+          expenseRegions: {
+            items: [
+              { region: 'HQ / HK', url: 'https://cost.woa.com/#/home', label: 'cost.woa.com' },
+              { region: 'Asia-Pacific', url: 'http://ap-cost.woa.com/#/home', label: 'ap-cost.woa.com' },
+              { region: 'Europe', url: 'http://eu-cost.woa.com/#/home', label: 'eu-cost.woa.com' },
+              { region: 'North America', url: 'http://na-cost.woa.com/#/home', label: 'na-cost.woa.com' },
+            ]
+          },
+          stepsAfterExpense: [
+            { zh: '⚠️ 如果出发前未获得 GM 邮件审批，费用确认时可能被打回，请务必提前操作', en: '⚠️ If GM approval was not obtained before departure, expenses may be rejected during confirmation. Always act in advance.' },
+            { zh: '海外办公室资讯 → <a href="https://doc.weixin.qq.com/sheet/e3_AKQAJAZaACo2wyeO0GmQv6WtY9w4N?scode=AJEAIQdfAAoWcz4lIeAWsASgboAIE&tab=BB08J2" target="_blank">各地海外办公室一览表</a>', en: 'Overseas office info → <a href="https://doc.weixin.qq.com/sheet/e3_AKQAJAZaACo2wyeO0GmQv6WtY9w4N?scode=AJEAIQdfAAoWcz4lIeAWsASgboAIE&tab=BB08J2" target="_blank">Overseas Office Directory</a>.' },
+            { zh: '海外员工差旅政策 → <a href="http://policy.woa.com/document/preview?documentId=6915fc8578c9401aada48465b3699893" target="_blank">查看文档</a>', en: 'Overseas employee travel policy → <a href="http://policy.woa.com/document/preview?documentId=6915fc8578c9401aada48465b3699893" target="_blank">View Policy</a>.' },
+          ],
+          visaNote: {
+            zh: '🛂 <strong>签证 & 邀请函</strong><br>· <a href="https://doc.weixin.qq.com/doc/w3_AKQAJAZaACo0KGTN3VjRqi4FVZH91?scode=AJEAIQdfAAoJFmzoa9AWsASgboAIE" target="_blank">外国来华签证指引</a><br>· 👉 外籍员工工作签证（含新入职人员）：<strong>v_xhhhchen（陈晓辉）680454</strong><br>· ⚠️ <strong>邀请函</strong>由实际邀请方 / 对接人 / 秘书开具，有模板参考，按领馆要求完善后自行申请盖章',
+            en: '🛂 <strong>Visa & Invitation Letters</strong><br>· <a href="https://doc.weixin.qq.com/doc/w3_AKQAJAZaACo0KGTN3VjRqi4FVZH91?scode=AJEAIQdfAAoJFmzoa9AWsASgboAIE" target="_blank">Visa guide for foreigners coming to China</a><br>· 👉 Work visa for non-PRC employees (including new hires): <strong>v_xhhhchen (Chen Xiaohui) 680454</strong><br>· ⚠️ <strong>Invitation letters</strong> are issued by the actual inviting party / POC / secretary. A template is available — complete per consulate requirements, then get it stamped.'
+          }
+        }
+      },
+      {
+        q: { zh: '📜 我需要盖合同章 / 借阅凭证，找谁？', en: '📜 I need a contract stamped or want to borrow vouchers — who do I contact?' },
+        steps: [
+          { zh: '企业微信搜索 <strong>「连线财经1-8003」</strong>，说明你的需求即可', en: 'WeCom search <strong>"Lianjie Finance 1-8003"</strong> and describe your request.' },
+          { zh: '可以处理：合同盖章、合同交取/归档/借阅、印章位置查询、凭证借阅', en: 'They handle: contract stamping, filing, archival & retrieval, seal location queries, voucher borrowing.' },
+          { zh: '更多操作参考 → <a href="https://iwiki.woa.com/space/8003" target="_blank">8003 知识库</a>', en: 'More details → <a href="https://iwiki.woa.com/space/8003" target="_blank">8003 Knowledge Base</a>.' },
         ]
       },
     ]
@@ -271,15 +388,33 @@ var SECTIONS = [
     icon: '🏢',
     zh: { title: '行政' },
     en: { title: 'Admin' },
+    welcome: {
+      zh: { title: '🏢 职场里的事，7000 帮你搞定', desc: '桌椅坏了、空调不制冷、打印机罢工……这些生活小烦恼，联系 7000 就能解决。' },
+      en: { title: '🏢 Workplace Issues? 7000 Has You Covered', desc: 'Broken chair, AC on the fritz, printer acting up — all solvable through 7000.' }
+    },
     contacts: [
       {
-        zh: { name: '7000（连线行政）', desc: '企业微信搜索「7000」\n关注公众号：腾讯行政\n\n行政事务咨询，包括报修办公桌椅、电灯、空调、打印机等办公环境，以及班车、食堂等行政福利反馈' },
-        en: { name: '7000 (Admin Contact)', desc: 'WeCom: "7000"\nOfficial Account: Tencent Admin\n\nAdmin inquiries: office repairs (desk/chair, lights, AC, printer), shuttle bus, canteen and other facilities.' },
+        zh: { name: '7000（连线行政）', desc: '企业微信搜索「7000」，或关注公众号：腾讯行政\n\n📌 适用场景：办公桌椅 / 电灯 / 空调 / 打印机报修，班车问题，食堂反馈，其他行政福利相关' },
+        en: { name: '7000 (Admin Contact)', desc: 'WeCom: "7000" | Official Account: Tencent Admin\n\n📌 Use for: Office repairs (desk, chair, lights, AC, printer), shuttle bus issues, canteen feedback, and other admin matters.' },
       }
     ],
-    links: [
-      { zh:'行政门户', en:'Admin Portal', url:'https://adm.woa.com/adm/' },
-      { zh:'7000 知识库', en:'7000 Knowledge Base', url:'https://iwiki.woa.com/space/7000' },
+    scenarios: [
+      {
+        q: { zh: '🔧 我的工位 / 设备坏了，怎么报修？', en: '🔧 Something at my workstation is broken — how do I report it?' },
+        steps: [
+          { zh: '企业微信搜索 <strong>「7000」</strong>，描述一下问题（什么设备、哪里坏了、工位在哪）', en: 'WeCom search <strong>"7000"</strong> and describe the issue (what broke, where it is, your workstation location).' },
+          { zh: '涵盖范围：办公桌椅、灯、空调、打印机等日常办公环境', en: 'Covers: desks & chairs, lights, AC, printers, and general office environment.' },
+          { zh: '也可以访问 <a href="https://adm.woa.com/adm/" target="_blank">行政门户</a> 自助提交工单', en: 'Or self-submit a ticket via the <a href="https://adm.woa.com/adm/" target="_blank">Admin Portal</a>.' },
+        ]
+      },
+      {
+        q: { zh: '🚌 班车有问题 / 食堂有意见，找谁反馈？', en: '🚌 Issues with the shuttle bus or canteen? Who do I tell?' },
+        steps: [
+          { zh: '统一联系 <strong>「7000」</strong>，说明情况，行政同学会跟进处理', en: 'Contact <strong>"7000"</strong> and describe the situation — the admin team will follow up.' },
+          { zh: '也可以关注公众号 <strong>「腾讯行政」</strong> 查看最新公告和服务信息', en: 'Follow official account <strong>"Tencent Admin"</strong> for announcements and service info.' },
+          { zh: '自助查询知识库 → <a href="https://iwiki.woa.com/space/7000" target="_blank">7000 知识库</a>', en: 'Self-service knowledge base → <a href="https://iwiki.woa.com/space/7000" target="_blank">7000 Knowledge Base</a>.' },
+        ]
+      },
     ]
   },
 
@@ -289,15 +424,32 @@ var SECTIONS = [
     icon: '👥',
     zh: { title: 'HR' },
     en: { title: 'HR' },
+    welcome: {
+      zh: { title: '👥 HR 的事，找小T就对了', desc: '入职、假期、薪资、保险……涉及到"人"的事情，小T都能帮你解答。' },
+      en: { title: '👥 HR Questions? 小T Is Your Go-To', desc: 'Onboarding, leave, payroll, insurance — anything people-related, 小T has the answers.' }
+    },
     contacts: [
       {
-        zh: { name: '小T（连线HR）', desc: '企业微信搜索「小T」\n\n商业保险、考勤管理、假期管理、入职、社会保险、薪酬发放等 HR 相关问题' },
-        en: { name: '小T (HR Contact)', desc: 'WeCom: "小T"\n\nBusiness insurance, attendance, leave, onboarding, social insurance, payroll and other HR matters.' },
+        zh: { name: '小T（连线HR）', desc: '企业微信搜索「小T」\n\n📌 适用场景：商业保险咨询、考勤/假期问题、入职相关事宜、社保查询、薪酬发放问题' },
+        en: { name: '小T (HR Contact)', desc: 'WeCom: "小T"\n\n📌 Use for: Business insurance, attendance & leave, onboarding, social insurance, payroll and other HR matters.' },
       }
     ],
-    links: [
-      { zh:'HR 门户', en:'HR Portal', url:'https://hr.woa.com/hrportal/Home' },
-      { zh:'HR 知识整合', en:'HR Knowledge Hub', url:'https://s3.woa.com/teams/k100049?company_from=1aa2c0363bb411ec9d760a78a976ded3' },
+    scenarios: [
+      {
+        q: { zh: '📋 我刚入职，有哪些 HR 的事需要办？', en: '📋 I just joined — what HR matters do I need to handle?' },
+        steps: [
+          { zh: '第一时间找 <strong>小T</strong>（企业微信搜索），她会告诉你入职需要完善的信息和资料', en: 'First thing: contact <strong>小T</strong> on WeCom — she\'ll walk you through what info and documents to submit.' },
+          { zh: '访问 <a href="https://hr.woa.com/hrportal/Home" target="_blank">HR 门户</a>，可以自助查看合同、假期余额、薪资条等', en: 'Check the <a href="https://hr.woa.com/hrportal/Home" target="_blank">HR Portal</a> for contracts, leave balances, payslips and more.' },
+          { zh: '入职指引和常见问题汇总 → <a href="https://s3.woa.com/teams/k100049?company_from=1aa2c0363bb411ec9d760a78a976ded3" target="_blank">HR 知识整合</a>', en: 'Onboarding guides and FAQs → <a href="https://s3.woa.com/teams/k100049?company_from=1aa2c0363bb411ec9d760a78a976ded3" target="_blank">HR Knowledge Hub</a>.' },
+        ]
+      },
+      {
+        q: { zh: '🏥 我想了解保险 / 查薪资 / 请假怎么处理？', en: '🏥 How do I check insurance, salary, or manage leave?' },
+        steps: [
+          { zh: '有任何这类问题，直接企业微信联系 <strong>小T</strong> 咨询，响应很快', en: 'For any of these questions, message <strong>小T</strong> on WeCom directly — she responds quickly.' },
+          { zh: '自助信息可在 <a href="https://hr.woa.com/hrportal/Home" target="_blank">HR 门户</a> 查看', en: 'Self-service info available on the <a href="https://hr.woa.com/hrportal/Home" target="_blank">HR Portal</a>.' },
+        ]
+      },
     ]
   },
 
@@ -307,26 +459,39 @@ var SECTIONS = [
     icon: '💻',
     zh: { title: 'IT' },
     en: { title: 'IT' },
+    welcome: {
+      zh: { title: '💻 电脑/系统有问题，8000 帮你搞', desc: '设备坏了、系统出故障、需要申领新设备，8000 团队都能处理。' },
+      en: { title: '💻 Tech Issues? 8000 Has Got It', desc: 'Broken device, system issues, need new equipment — the 8000 team handles it all.' }
+    },
     contacts: [
       {
-        zh: { name: '8000助手（IT业务）', desc: '企业微信搜索「8000助手」\n\nIT 问题咨询：电脑损坏、系统需求等' },
-        en: { name: '8000 Assistant (IT)', desc: 'WeCom: "8000 Assistant"\n\nIT support: broken equipment, system requests, etc.' },
+        zh: { name: '8000助手（IT业务）', desc: '企业微信搜索「8000助手」\n\n📌 适用场景：电脑损坏、系统问题、IT 需求咨询' },
+        en: { name: '8000 Assistant (IT)', desc: 'WeCom: "8000 Assistant"\n\n📌 Use for: Broken equipment, system issues, IT requests.' },
       }
     ],
-    links: [
-      { zh:'IT 门户', en:'IT Portal', url:'https://8000.woa.com/v3/Home' },
-      { zh:'8000 知识库', en:'8000 Knowledge Base', url:'https://iwiki.woa.com/space/8000kb' },
-    ],
-    subsections: [
+    scenarios: [
       {
-        zh: { title: 'IT 设备申领' }, en: { title: 'Device Requests' },
-        links: [
-          { zh:'IT 设备申领', en:'Request IT Equipment', url:'https://itg.woa.com/devices?category_code=all' },
-          { zh:'IT 设备退库 / 移交指引', en:'Device Return / Transfer Guide', url:'https://8000.woa.com/v3/KnowledgeStore/Article/486252342' },
-          { zh:'未满年限设备更换指引', en:'Early Device Replacement Guide', url:'https://8000.woa.com/v3/KnowledgeStore/Article/487139636' },
-          { zh:'办公电脑发放标准', en:'Laptop Issuance Standards', url:'https://8000.woa.com/v3/KnowledgeStore/Article/887557051' },
+        q: { zh: '🖥️ 我的电脑坏了 / 系统出问题了，怎么处理？', en: '🖥️ My computer is broken or has a system issue — what do I do?' },
+        steps: [
+          { zh: '企业微信搜索 <strong>「8000助手」</strong>，描述问题，IT 同学会给出解决方案或安排上门', en: 'WeCom search <strong>"8000 Assistant"</strong> and describe the issue — the IT team will advise or arrange on-site support.' },
+          { zh: '也可以登录 <a href="https://8000.woa.com/v3/Home" target="_blank">IT 门户</a> 自助提单', en: 'Or self-submit via the <a href="https://8000.woa.com/v3/Home" target="_blank">IT Portal</a>.' },
+          { zh: '常见问题自助查 → <a href="https://iwiki.woa.com/space/8000kb" target="_blank">8000 知识库</a>', en: 'Self-service FAQs → <a href="https://iwiki.woa.com/space/8000kb" target="_blank">8000 Knowledge Base</a>.' },
         ]
-      }
+      },
+      {
+        q: { zh: '📦 我需要申领 IT 设备（电脑/外设），怎么操作？', en: '📦 How do I request IT equipment (laptop / peripherals)?' },
+        steps: [
+          { zh: '登录 <a href="https://itg.woa.com/devices?category_code=all" target="_blank">IT 设备申领平台</a>，选择需要的设备提交申请', en: 'Log in to the <a href="https://itg.woa.com/devices?category_code=all" target="_blank">IT Equipment Request Platform</a>, select what you need and submit.' },
+          { zh: '想了解能申领什么设备、有什么标准？→ <a href="https://8000.woa.com/v3/KnowledgeStore/Article/887557051" target="_blank">办公电脑发放标准</a>', en: 'Want to know what\'s available and the issuance standards? → <a href="https://8000.woa.com/v3/KnowledgeStore/Article/887557051" target="_blank">Laptop Issuance Standards</a>.' },
+        ]
+      },
+      {
+        q: { zh: '🔄 我想归还 / 移交设备，或者提前换电脑，怎么做？', en: '🔄 How do I return, transfer, or replace a device early?' },
+        steps: [
+          { zh: '设备归还/移交：参考 <a href="https://8000.woa.com/v3/KnowledgeStore/Article/486252342" target="_blank">IT 设备退库 / 移交指引</a>', en: 'Return or transfer: See <a href="https://8000.woa.com/v3/KnowledgeStore/Article/486252342" target="_blank">Device Return / Transfer Guide</a>.' },
+          { zh: '未满年限想换电脑：参考 <a href="https://8000.woa.com/v3/KnowledgeStore/Article/487139636" target="_blank">未满年限设备更换指引</a>，了解条件和流程', en: 'Replace device before end of lifecycle: See <a href="https://8000.woa.com/v3/KnowledgeStore/Article/487139636" target="_blank">Early Device Replacement Guide</a> for eligibility and steps.' },
+        ]
+      },
     ]
   },
 
@@ -336,15 +501,25 @@ var SECTIONS = [
     icon: '📦',
     zh: { title: '物资采购' },
     en: { title: 'Procurement' },
+    welcome: {
+      zh: { title: '📦 需要物资 / 采购，找 69000', desc: '需要领用办公用品，或者有采购需求，69000 来帮你。' },
+      en: { title: '📦 Need Supplies or to Make a Purchase? 69000 Is Your Friend', desc: 'Office supplies, procurement requests — 69000 handles it.' }
+    },
     contacts: [
       {
-        zh: { name: '69000', desc: '企业微信搜索「69000」\n\n采购相关问题咨询，物资领用、配送等' },
-        en: { name: '69000', desc: 'WeCom: "69000"\n\nProcurement inquiries, supplies collection and delivery.' },
+        zh: { name: '69000', desc: '企业微信搜索「69000」\n\n📌 适用场景：物资领用、配送、采购问题咨询' },
+        en: { name: '69000', desc: 'WeCom: "69000"\n\n📌 Use for: Supplies collection, delivery, procurement inquiries.' },
       }
     ],
-    links: [
-      { zh:'物资申请', en:'Request Supplies', url:'https://tpp.woa.com/main/#/home/index' },
-      { zh:'采购运营知识库', en:'Procurement Knowledge Base', url:'https://iwiki.woa.com/space/CGYY' },
+    scenarios: [
+      {
+        q: { zh: '📝 我需要领用办公用品 / 提交采购申请，怎么操作？', en: '📝 How do I request office supplies or submit a procurement request?' },
+        steps: [
+          { zh: '登录 <a href="https://tpp.woa.com/main/#/home/index" target="_blank">物资申请平台</a>，按需选择类型提交申请', en: 'Log in to the <a href="https://tpp.woa.com/main/#/home/index" target="_blank">Supplies Request Platform</a>, choose your category and submit.' },
+          { zh: '有疑问或特殊需求：企业微信搜索 <strong>「69000」</strong> 直接咨询', en: 'Questions or special requests: WeCom <strong>"69000"</strong>.' },
+          { zh: '政策和流程说明 → <a href="https://iwiki.woa.com/space/CGYY" target="_blank">采购运营知识库</a>', en: 'Policies and process guides → <a href="https://iwiki.woa.com/space/CGYY" target="_blank">Procurement Knowledge Base</a>.' },
+        ]
+      },
     ]
   },
 
@@ -354,12 +529,22 @@ var SECTIONS = [
     icon: '📚',
     zh: { title: '学习资源' },
     en: { title: 'Learning' },
-    links: [
-      { zh:'全球日历', en:'Global Calendar', url:'https://km.woa.com/articles/show/649249?kmref=profile_feeds' },
-      { zh:'腾讯游戏知识库', en:'Tencent Games Knowledge Base', url:'https://game.woa.com/?kmref=vkm_header' },
-      { zh:'腾讯乐享', en:'Tencent Lexiang', url:'https://tencent.lexiangla.com/?company_from=tencent' },
-      { zh:'腾讯 KM', en:'Tencent KM', url:'https://km.woa.com/?kmref=vkm_header' },
-      { zh:'腾讯学堂', en:'Tencent Academy', url:'https://portal.learn.woa.com/user/home' },
+    welcome: {
+      zh: { title: '📚 想学点什么？这里都有', desc: '腾讯的学习资源还挺丰富的，知识库、课程、内部社区，逛起来吧。' },
+      en: { title: '📚 Want to Learn Something? It\'s All Here', desc: 'Tencent\'s learning resources are pretty rich — knowledge bases, courses, communities. Explore away.' }
+    },
+    scenarios: [
+      {
+        q: { zh: '📖 我想查阅公司内部知识 / 学习资源，从哪里入口？', en: '📖 Where do I find internal knowledge and learning resources?' },
+        steps: [
+          { zh: '<a href="https://game.woa.com/?kmref=vkm_header" target="_blank">腾讯游戏知识库</a> — 游戏相关业务知识沉淀', en: '<a href="https://game.woa.com/?kmref=vkm_header" target="_blank">Tencent Games Knowledge Base</a> — game business knowledge.' },
+          { zh: '<a href="https://km.woa.com/?kmref=vkm_header" target="_blank">腾讯 KM</a> — 全司知识分享平台，文章、经验帖都在这里', en: '<a href="https://km.woa.com/?kmref=vkm_header" target="_blank">Tencent KM</a> — company-wide knowledge sharing: articles, experience posts.' },
+          { zh: '<a href="https://portal.learn.woa.com/user/home" target="_blank">腾讯学堂</a> — 官方课程和培训，想系统学习可以从这里开始', en: '<a href="https://portal.learn.woa.com/user/home" target="_blank">Tencent Academy</a> — official courses and training.' },
+          { zh: '<a href="https://tencent.lexiangla.com/?company_from=tencent" target="_blank">腾讯乐享</a> — 员工社区，活动资讯、文化内容都在', en: '<a href="https://tencent.lexiangla.com/?company_from=tencent" target="_blank">Tencent Lexiang</a> — employee community: activities, culture content.' },
+          { zh: '<a href="https://km.woa.com/articles/show/649249?kmref=profile_feeds" target="_blank">全球日历</a> — 各地区假日/节假日信息一览', en: '<a href="https://km.woa.com/articles/show/649249?kmref=profile_feeds" target="_blank">Global Calendar</a> — public holidays by region.' },
+          { zh: '⭐ <a href="https://km.woa.com/group/52553" target="_blank">IEG 全球化办公交流社区（K 吧）</a> — 涵盖诸多有用信息，强推查看学习！例如海外展会类资讯', en: '⭐ <a href="https://km.woa.com/group/52553" target="_blank">IEG Globalization Office Community (K Club)</a> — Lots of useful info, highly recommended! e.g. overseas expo & event updates.' },
+        ]
+      },
     ]
   },
 ];
@@ -367,21 +552,40 @@ var SECTIONS = [
 /* ── Helpers ── */
 function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 function t(obj, key){ return (obj[lang] && obj[lang][key]) ? obj[lang][key] : (obj.zh[key] || ''); }
+function rawT(obj, key){ return (obj[lang] && obj[lang][key]) ? obj[lang][key] : (obj.zh[key] || ''); }
 
 /* ── Nav ── */
 function buildNav(){
   var nav = document.getElementById('nav');
-  nav.innerHTML = SECTIONS.filter(function(s){
+  var filtered = SECTIONS.filter(function(s){
     if(!searchQ) return true;
-    return t(s,'title').toLowerCase().indexOf(searchQ.toLowerCase()) >= 0;
-  }).map(function(s){
+    var q = searchQ.toLowerCase();
+    // match section title
+    if(t(s,'title').toLowerCase().indexOf(q) >= 0) return true;
+    // match scenario questions and step text
+    if(s.scenarios){
+      return s.scenarios.some(function(sc){
+        var qText = (sc.q && (sc.q.zh||'') + (sc.q.en||'')).toLowerCase();
+        if(qText.indexOf(q) >= 0) return true;
+        var steps = sc.steps || (sc.cn && sc.cn.steps) || [];
+        return steps.some(function(st){ return ((st.zh||'')+(st.en||'')).toLowerCase().indexOf(q) >= 0; });
+      });
+    }
+    return false;
+  });
+  // if current activeId is not in filtered list, switch to first match
+  if(searchQ && filtered.length && !filtered.some(function(s){ return s.id === activeId; })){
+    activeId = filtered[0].id;
+    buildContent();
+  }
+  nav.innerHTML = filtered.map(function(s){
     var active = s.id === activeId;
     return '<button class="nav-item'+(active?' active':'')+'" onclick="switchTo(\''+s.id+'\')">'+
       '<span class="ni-icon">'+s.icon+'</span>'+
       '<span class="ni-text">'+esc(t(s,'title'))+'</span>'+
       '<span class="ni-arrow">›</span>'+
     '</button>';
-  }).join('');
+  }).join('') || '<div style="padding:12px 16px;font-size:.82em;color:var(--text-3)">'+(lang==='zh'?'无匹配结果':'No results found')+'</div>';
 }
 
 /* ── Content ── */
@@ -392,6 +596,12 @@ function buildContent(){
 
   // page header
   h += '<div class="page-hd"><div class="page-hd-top"><div class="page-hd-icon">'+sec.icon+'</div><h2>'+esc(t(sec,'title'))+'</h2></div><div class="page-hd-bar"></div></div>';
+
+  // welcome banner
+  if(sec.welcome){
+    var w = sec.welcome;
+    h += '<div class="welcome-banner"><div class="wb-title">'+esc(t(w,'title'))+'</div><div class="wb-desc">'+esc(t(w,'desc'))+'</div></div>';
+  }
 
   // highlight (企鹅岛)
   if(sec.highlight){
@@ -412,7 +622,110 @@ function buildContent(){
     h += '</div>';
   }
 
-  // top-level links
+  // scenarios
+  if(sec.scenarios && sec.scenarios.length){
+    h += '<div class="block">';
+    h += '<div class="block-label"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>'+(lang==='zh'?'常见场景指引':'Common Scenarios')+'</div>';
+    sec.scenarios.forEach(function(sc, scIdx){
+      h += '<div class="scenario-block">';
+      var qObj = sc.q; var qText = (qObj[lang] || qObj.zh || '');
+      h += '<div class="sb-question"><span class="sb-q-icon">💬</span><span class="sb-q-text">'+esc(qText)+'</span></div>';
+      h += '<div class="sb-answer">';
+
+      if(sc.rolePickerScenario){
+        // Role picker UI
+        var currentRole = roleState[scIdx] || '';
+        h += '<div class="role-picker">';
+        h += '<button id="rpbtn-cn-'+scIdx+'" class="role-btn'+(currentRole==='cn'?' active-cn':'')+'" onclick="pickRole('+scIdx+',\'cn\')">';
+        h += '<span class="rb-icon">🇨🇳</span>';
+        h += '<span class="rb-label">'+(lang==='zh'?'中国同事':'China-Based')+'</span>';
+        h += '<span class="rb-sub">'+(lang==='zh'?'国内差旅 / 出境出差':'Domestic & overseas trips')+'</span>';
+        h += '</button>';
+        h += '<button id="rpbtn-global-'+scIdx+'" class="role-btn'+(currentRole==='global'?' active-global':'')+'" onclick="pickRole('+scIdx+',\'global\')">';
+        h += '<span class="rb-icon">🌏</span>';
+        h += '<span class="rb-label">'+(lang==='zh'?'Global 同事':'Global Colleagues')+'</span>';
+        h += '<span class="rb-sub">'+(lang==='zh'?'海外员工差旅':'Overseas-based staff')+'</span>';
+        h += '</button>';
+        h += '</div>';
+
+        // CN panel
+        var cnData = sc.cn;
+        var cnHint = cnData.hint ? (lang==='en' ? cnData.hint.en : cnData.hint.zh) : '';
+        h += '<div id="rp-cn-'+scIdx+'" class="role-panel'+(currentRole==='cn'?' visible':'')+'">';
+        if(cnHint) h += '<div class="role-hint">'+esc(cnHint)+'</div>';
+        h += buildStepList(cnData.steps);
+        if(cnData.travelNotes){
+          var tn = lang==='en' ? cnData.travelNotes.en : cnData.travelNotes.zh;
+          h += '<div class="sb-tip" style="margin-top:12px">'+tn+'</div>';
+        }
+        if(cnData.visaNote){
+          var vn = lang==='en' ? cnData.visaNote.en : cnData.visaNote.zh;
+          h += '<div class="sb-tip" style="margin-top:8px">'+vn+'</div>';
+        }
+        if(cnData.outboundNote){
+          var oNote = lang==='en' ? cnData.outboundNote.en : cnData.outboundNote.zh;
+          h += '<div class="sb-tip" style="margin-top:8px">'+oNote+'</div>';
+        }
+        h += '</div>';
+
+        // Global panel
+        var glData = sc.global;
+        var glHint = glData.hint ? (lang==='en' ? glData.hint.en : glData.hint.zh) : '';
+        h += '<div id="rp-global-'+scIdx+'" class="role-panel'+(currentRole==='global'?' visible':'')+'">';
+        if(glHint) h += '<div class="role-hint">'+esc(glHint)+'</div>';
+        h += buildStepList(glData.steps);
+        // Booking region cards
+        if(glData.bookingRegions){
+          var br = glData.bookingRegions;
+          if(br.note){ var brNote = lang==='en' ? br.note.en : br.note.zh; h += '<div class="sb-tip" style="margin-bottom:8px">'+brNote+'</div>'; }
+          h += '<div class="region-grid" style="margin-bottom:16px">';
+          br.items.forEach(function(item){
+            h += '<a class="region-card" href="'+esc(item.url)+'" target="_blank" rel="noopener">';
+            h += '<div class="rc-region">'+esc(item.region)+'</div>';
+            h += '<div class="rc-name">'+esc(item.label)+'</div>';
+            h += '<div class="rc-arr">→</div>';
+            h += '</a>';
+          });
+          h += '</div>';
+        }
+        h += buildStepList(glData.stepsAfterBooking);
+        // Expense region cards
+        if(glData.expenseRegions){
+          var er = glData.expenseRegions;
+          h += '<div class="region-grid" style="margin-bottom:16px">';
+          er.items.forEach(function(item){
+            h += '<a class="region-card" href="'+esc(item.url)+'" target="_blank" rel="noopener">';
+            h += '<div class="rc-region">'+esc(item.region)+'</div>';
+            h += '<div class="rc-name">'+esc(item.label)+'</div>';
+            h += '<div class="rc-arr">→</div>';
+            h += '</a>';
+          });
+          h += '</div>';
+        }
+        h += buildStepList(glData.stepsAfterExpense);
+        if(glData.visaNote){
+          var glvn = lang==='en' ? glData.visaNote.en : glData.visaNote.zh;
+          h += '<div class="sb-tip" style="margin-top:8px">'+glvn+'</div>';
+        }
+        h += '</div>';
+
+      } else {
+        h += buildStepList(sc.steps);
+        if(sc.note){
+          var n = sc.note;
+          var noteTitle = lang==='en' ? n.en : n.zh;
+          h += '<div class="note-box"><div class="note-title">'+esc(noteTitle)+'</div>';
+          n.rows.forEach(function(r){ h += '<div class="note-row">'+esc(r)+'</div>'; });
+          h += '</div>';
+        }
+      }
+
+      h += '</div></div>';
+    });
+    h += '</div>';
+  }
+
+  // top-level links (fallback for learn)
   if(sec.links && sec.links.length){
     h += '<div class="block">';
     h += '<div class="block-label"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>'+(lang==='zh'?'快速链接':'Quick Links')+'</div>';
@@ -422,54 +735,6 @@ function buildContent(){
       h += '<a class="link-card" href="'+esc(url)+'" target="_blank" rel="noopener"><span class="lc-text">'+esc(lang==='en'?l.en:l.zh)+'</span><span class="lc-arr">›</span></a>';
     });
     h += '</div></div>';
-  }
-
-  // subsections
-  if(sec.subsections && sec.subsections.length){
-    sec.subsections.forEach(function(sub){
-      h += '<div class="subsec"><div class="subsec-hd">'+esc(t(sub,'title'))+'</div><div class="subsec-body">';
-
-      // items (交通/工卡 etc.)
-      if(sub.items){
-        h += '<div class="subsec-links">';
-        sub.items.forEach(function(item){
-          var label = lang==='en' ? item.en : item.zh;
-          if(item.type==='link'){
-            h += '<a class="sub-link" href="'+esc(item.url)+'" target="_blank" rel="noopener">'+
-              '<div class="sl-left"><div class="sl-dot"></div><span>'+esc(label)+'</span></div>'+
-              '<span class="sl-ext">↗</span></a>';
-          } else {
-            // plain text, no link
-            h += '<div class="sub-text"><div class="sl-dot"></div><span>'+esc(label)+'</span></div>';
-          }
-        });
-        h += '</div>';
-      }
-
-      // links (报销/差旅/IT设备)
-      if(sub.links){
-        h += '<div class="subsec-links">';
-        sub.links.forEach(function(l){
-          var url = (lang==='en' && l.url_en) ? l.url_en : (l.url_zh || l.url);
-          var label = lang==='en' ? l.en : l.zh;
-          h += '<a class="sub-link" href="'+esc(url)+'" target="_blank" rel="noopener">'+
-            '<div class="sl-left"><div class="sl-dot"></div><span>'+esc(label)+'</span></div>'+
-            '<span class="sl-ext">↗</span></a>';
-        });
-        h += '</div>';
-
-        // note (invoice)
-        if(sub.note){
-          var n = sub.note;
-          h += '<div class="note-box"><div class="note-title">'+esc(t(n,'title'))+'</div>';
-          h += '<div style="font-size:.76em;color:#92400e;margin-bottom:7px">'+esc(t(n,'hint'))+'</div>';
-          n.rows.forEach(function(r){ h += '<div class="note-row">'+esc(r)+'</div>'; });
-          h += '</div>';
-        }
-      }
-
-      h += '</div></div>';
-    });
   }
 
   document.getElementById('content').innerHTML = h;
@@ -490,7 +755,7 @@ function setLang(l){
   document.getElementById('btn-zh').classList.toggle('active', l==='zh');
   document.getElementById('btn-en').classList.toggle('active', l==='en');
   document.getElementById('searchInput').placeholder = l==='zh'?'搜索...':'Search...';
-  document.getElementById('sf-title').textContent = l==='zh'?'Need Help?':'Need Help?';
+  document.getElementById('sf-title').textContent = 'Need Help?';
   document.getElementById('sf-body').textContent = l==='zh'?'通过企业微信联系对应职能负责人处理紧急事务':'Contact the relevant team via WeCom for urgent matters.';
   buildNav();
   buildContent();
@@ -504,6 +769,31 @@ function doSearch(){
 function toggleSb(){
   document.getElementById('sidebar').classList.toggle('open');
   document.getElementById('mob-ov').classList.toggle('open');
+}
+
+// Role picker state per scenario (keyed by index)
+var roleState = {};
+
+function pickRole(scIdx, role){
+  roleState[scIdx] = role;
+  var cnPanel = document.getElementById('rp-cn-'+scIdx);
+  var globalPanel = document.getElementById('rp-global-'+scIdx);
+  var btnCn = document.getElementById('rpbtn-cn-'+scIdx);
+  var btnGlobal = document.getElementById('rpbtn-global-'+scIdx);
+  if(cnPanel) cnPanel.classList.toggle('visible', role==='cn');
+  if(globalPanel) globalPanel.classList.toggle('visible', role==='global');
+  if(btnCn){ btnCn.classList.toggle('active-cn', role==='cn'); btnCn.classList.remove('active-global'); }
+  if(btnGlobal){ btnGlobal.classList.toggle('active-global', role==='global'); btnGlobal.classList.remove('active-cn'); }
+}
+
+function buildStepList(steps){
+  var h = '<ul class="step-list">';
+  steps.forEach(function(step, i){
+    var text = lang==='en' ? step.en : step.zh;
+    h += '<li class="step-item"><div class="step-num">'+(i+1)+'</div><div class="step-body">'+text+'</div></li>';
+  });
+  h += '</ul>';
+  return h;
 }
 
 buildNav();
