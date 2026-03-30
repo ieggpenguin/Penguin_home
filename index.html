@@ -49,7 +49,6 @@ main{max-width:1100px;margin:0 auto;padding:20px}
 .cat-icon-wrap{width:44px;height:44px;background:rgba(255,255,255,.2);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
 .cat-info{margin-left:12px;flex:1}
 .cat-name{color:white;font-weight:800;font-size:.95em;line-height:1.3}
-.cat-name-en{color:rgba(255,255,255,.65);font-size:.68em;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-top:1px}
 .cat-cnt{color:rgba(255,255,255,.7);font-size:.72em;margin-top:2px}
 .cat-arrow{color:rgba(255,255,255,.8);font-size:18px;transition:transform .25s;flex-shrink:0}
 .cat-arrow.open{transform:rotate(180deg)}
@@ -61,11 +60,11 @@ main{max-width:1100px;margin:0 auto;padding:20px}
 .item-list::-webkit-scrollbar{width:4px}
 .item-list::-webkit-scrollbar-track{background:transparent}
 .item-list::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:4px}
-a.item{display:block;background:white;border-radius:14px;border:1px solid #e2e8f0;padding:14px;margin-bottom:8px;text-decoration:none;color:inherit;transition:all .18s;position:relative}
-a.item:last-child{margin-bottom:0}
-a.item:hover{border-color:var(--brand-mid);transform:translateX(4px);box-shadow:0 4px 16px rgba(79,70,229,.1)}
+.item{display:block;background:white;border-radius:14px;border:1px solid #e2e8f0;padding:14px;margin-bottom:8px;text-decoration:none;color:inherit;transition:all .18s;position:relative}
+.item:last-child{margin-bottom:0}
+.item:hover{border-color:var(--brand-mid);box-shadow:0 4px 16px rgba(79,70,229,.1)}
 .item-name{font-weight:700;font-size:.88em;color:#1e293b;margin-bottom:2px;line-height:1.4;padding-right:20px}
-a.item:hover .item-name{color:var(--brand)}
+.item:hover .item-name{color:var(--brand)}
 .item-name-en{font-size:.73em;color:#94a3b8;font-style:italic;margin-bottom:7px;line-height:1.3}
 .item-desc{font-size:.75em;color:#64748b;margin-bottom:7px;line-height:1.55;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:7px}
@@ -73,11 +72,21 @@ a.item:hover .item-name{color:var(--brand)}
 .tag-cat{background:#eef2ff;color:#4338ca}
 .tag-price{background:#f0fdf4;color:#059669}
 .tag-fac{background:#fff7ed;color:#b45309}
-.meta{display:grid;grid-template-columns:1fr 1fr;gap:3px}
+.meta{display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-bottom:8px}
 .meta-full{grid-column:1/-1}
 .meta span{display:flex;align-items:center;gap:4px;font-size:.72em;color:#64748b;line-height:1.7}
 .ext{position:absolute;top:14px;right:14px;color:#cbd5e1;font-size:11px;font-weight:700}
-a.item:hover .ext{color:var(--brand-mid)}
+.item:hover .ext{color:var(--brand-mid)}
+
+/* ── Item Action Buttons ── */
+.item-actions{display:flex;gap:6px;margin-top:6px}
+.ia-btn{flex:1;padding:6px 4px;border-radius:8px;font-size:.72em;font-weight:700;text-align:center;text-decoration:none;cursor:pointer;border:none;transition:all .18s;display:flex;align-items:center;justify-content:center;gap:3px;white-space:nowrap}
+.ia-nav{background:#f0fdf4;color:#059669}
+.ia-nav:hover{background:#059669;color:white}
+.ia-dp{background:#fff7ed;color:#b45309}
+.ia-ctrip{background:#e6f7f5;color:#00897b}
+.ia-ctrip:hover{background:#00897b;color:white}
+.ia-dp:hover{background:#b45309;color:white}
 
 /* ── Footer ── */
 footer{max-width:1100px;margin:16px auto 40px;text-align:center;color:#94a3b8;font-size:.77em;padding:0 20px}
@@ -87,6 +96,8 @@ footer{max-width:1100px;margin:16px auto 40px;text-align:center;color:#94a3b8;fo
 @media(max-width:640px){
   .tab-pane.active{grid-template-columns:1fr}
   .hd-title{font-size:1.05em}
+  .nearby-card{gap:8px}
+  .ia-btn{font-size:.68em;padding:5px 3px}
 }
 </style>
 </head>
@@ -117,6 +128,10 @@ footer{max-width:1100px;margin:16px auto 40px;text-align:center;color:#94a3b8;fo
   </div>
 </header>
 
+<div class="nearby-results" id="nearby-results" style="display:none">
+  <div id="nearby-inner"></div>
+</div>
+
 <main>
   <div id="pane-hotel" class="tab-pane active"></div>
   <div id="pane-dining" class="tab-pane"></div>
@@ -125,11 +140,22 @@ footer{max-width:1100px;margin:16px auto 40px;text-align:center;color:#94a3b8;fo
 </main>
 
 <footer>
-  <p id="ft-tip">✅ 点击卡片跳转大众点评 / 必应搜索查看详情</p>
+  <p id="ft-tip">✅ 酒店/团建 → 必应搜索 · 餐饮/娱乐 → 大众点评 · 🧭 导航由企鹅岛出发</p>
   <p style="margin-top:5px" id="ft-copy">IEG Global · 企鹅岛入驻专属指南 | 2026年3月</p>
 </footer>
 
 <script>
+// ─────────────────────────────────────────
+// 配置
+// ─────────────────────────────────────────
+var TXMAP_KEY = 'KZWBZ-YIH6M-7QN6E-6EZET-YKPUE-PQBOS';
+// 企鹅岛·云海大厦3栋 坐标
+var BASE_LAT = 22.5553;
+var BASE_LNG = 113.8995;
+
+// ─────────────────────────────────────────
+// 数据
+// ─────────────────────────────────────────
 var HOTELS=[
   { name: "醒悦酒店(深圳宝安坪洲地铁站店)", nameEn: "Xingyue Hotel (Pingzhou)", location: "坪洲", locationEn: "Pingzhou", distance: "驾车4.7公里", distanceEn: "4.7km Drive", price: "150-200", priceEn: "150-200", priceValue: 175 },
   { name: "铂曼酒店(深圳宝安中心体育馆翻身地铁站店)", nameEn: "Boman Hotel (Fanshen)", location: "翻身", locationEn: "Fanshen", distance: "驾车4.5公里", distanceEn: "4.5km Drive", price: "150-200", priceEn: "150-200", priceValue: 175 },
@@ -161,17 +187,17 @@ var HOTELS=[
 ];
 var RESTAURANTS=[
   { name: "哲品ZENS Restaurant(腾讯总部园区店)", nameEn: "ZENS Restaurant", category: "法国料理", categoryEn: "French", location: "云海1栋G层", locationEn: "Yunhai Bldg 1, GF", distance: "150m", distanceEn: "150m", avgPrice: 80, rooms: "10-14人", roomsEn: "10-14 pax", description: "精致法餐，环境优雅，适合小型商务午餐或精致聚会。", descriptionEn: "Exquisite French cuisine with an elegant atmosphere, perfect for business lunches." },
-  { name: "和见海苑·商务宴·家宴·生日宴", nameEn: "Hejian Haiyuan", category: "广州菜", categoryEn: "Cantonese", location: "宝华站", locationEn: "Baohua Station", distance: "2.5km", distanceEn: "2.5km", avgPrice: 176, rooms: "多个包间，最大容纳45人", roomsEn: "Multiple rooms, up to 45 pax", description: "地道广州菜，包间充足且空间大，商务宴请首选。", descriptionEn: "Authentic Cantonese food with spacious private rooms, ideal for business banquets." },
+  { name: "和见海苑·商务宴·家宴·生日宴", nameEn: "Hejian Haiyuan", category: "广州菜", categoryEn: "Cantonese", location: "宝华站", locationEn: "Baohua Station", distance: "2.5km", distanceEn: "2.5km", avgPrice: 176, rooms: "多个包间，最大容纳45人", roomsEn: "Multiple rooms, up to 45 pax", description: "地道广州菜，包间充足且空间大，商务宴请首选。", descriptionEn: "Authentic Cantonese food with spacious private rooms, ideal for business banquets.", teamBuilding: true },
   { name: "食醺记·山野贵州菜(腾讯总部园区店)", nameEn: "Shixunji Guizhou Cuisine", category: "贵州菜", categoryEn: "Guizhou", location: "企鹅公寓4栋", locationEn: "Penguin Apt Bldg 4", distance: "200m", distanceEn: "200m", avgPrice: 100, rooms: "无", roomsEn: "None", manualTier: "casual", description: "特色贵州风味，离园区极近，适合团队日常工作午餐。", descriptionEn: "Special Guizhou flavors very close to the campus, suitable for daily team lunches." },
-  { name: "榕意·川味之美(腾讯总部园区店)", nameEn: "Rongyi Sichuan Cuisine", category: "川菜", categoryEn: "Sichuan", location: "云海2栋G层", locationEn: "Yunhai Bldg 2, GF", distance: "240m", distanceEn: "240m", avgPrice: 100, rooms: "多个包间", roomsEn: "Multiple rooms", description: "精致川菜，口味稳定，设有包间，适合部门小聚。", descriptionEn: "Refined Sichuan dishes with consistent taste and private rooms for team gatherings." },
+  { name: "榕意·川味之美(腾讯总部园区店)", nameEn: "Rongyi Sichuan Cuisine", category: "川菜", categoryEn: "Sichuan", location: "云海2栋G层", locationEn: "Yunhai Bldg 2, GF", distance: "240m", distanceEn: "240m", avgPrice: 100, rooms: "多个包间", roomsEn: "Multiple rooms", description: "精致川菜，口味稳定，设有包间，适合部门小聚。", descriptionEn: "Refined Sichuan dishes with consistent taste and private rooms for team gatherings.", teamBuilding: true },
   { name: "名人坊·精致新粤菜·海鲜·茶点", nameEn: "Celebrity Cuisine", category: "广州菜", categoryEn: "Cantonese", location: "欢乐港湾", locationEn: "OH Bay", distance: "1.6km", distanceEn: "1.6km", avgPrice: 240, rooms: "4-8人包间", roomsEn: "4-8 pax rooms", description: "米其林水准粤菜，环境尊贵，适合高规格商务接待。", descriptionEn: "Michelin-standard Cantonese cuisine, prestigious environment for high-end receptions." },
   { name: "大馥串烧·KUSHIYAKI IZAKAYA(腾讯总部园区店)", nameEn: "Dafu Kushiyaki", category: "烧烤", categoryEn: "BBQ/Izakaya", location: "云海2栋G层", locationEn: "Yunhai Bldg 2, GF", distance: "100m", distanceEn: "100m", avgPrice: 54, rooms: "无", roomsEn: "None", description: "人气日式串烧，氛围热烈，适合下班后同事小酌放松。", descriptionEn: "Popular Japanese skewers with a lively vibe, great for after-work drinks." },
   { name: "观海(欢乐港湾店)", nameEn: "Guanhai (OH Bay)", category: "粤菜", categoryEn: "Cantonese", location: "欢乐港湾", locationEn: "OH Bay", distance: "1.6km", distanceEn: "1.6km", avgPrice: 280, rooms: "10-12人包间", roomsEn: "10-12 pax rooms", description: "一线海景粤菜，包间视野极佳，适合重要商务晚宴。", descriptionEn: "Sea-view Cantonese restaurant with excellent private room vistas for important dinners." },
   { name: "8桂·广西菜(壹方城店)", nameEn: "8 Gui Guangxi Cuisine", category: "广西菜", categoryEn: "Guangxi", location: "壹方城", locationEn: "Uniwalk", distance: "2.7km", distanceEn: "2.7km", avgPrice: 95, rooms: "4-8人包间", roomsEn: "4-8 pax rooms", description: "地道广西风味，性价比高，适合部门日常聚餐。", descriptionEn: "Authentic Guangxi flavors with high cost-performance, good for daily team meals." },
-  { name: "六个大厨·秘制粤菜(前海壹方城店)", nameEn: "Six Chefs Cantonese", category: "粤菜", categoryEn: "Cantonese", location: "壹方城", locationEn: "Uniwalk", distance: "2.5km", distanceEn: "2.5km", avgPrice: 127, rooms: "多个包间，最大容纳20人", roomsEn: "Multiple rooms, up to 20 pax", description: "传统粤菜功底，包间容纳度高，适合中型团队聚会。", descriptionEn: "Traditional Cantonese skills with high room capacity, suitable for mid-sized groups." },
-  { name: "花悦庭CHEF•现代浙菜(前海壹方汇店)", nameEn: "Huayueting Chef", category: "浙菜", categoryEn: "Zhejiang", location: "前海壹方汇", locationEn: "Qianhai One Excellence", distance: "3.7km", distanceEn: "3.7km", avgPrice: 300, rooms: "多个包间，最大容纳45人", roomsEn: "Multiple rooms, up to 45 pax", description: "现代浙菜典范，装修大气，适合正式商务宴请及家宴。", descriptionEn: "A model of modern Zhejiang cuisine, grand decor for formal business and family banquets." },
-  { name: "水岸十里·江海时鲜(万象前海店)", nameEn: "Shuian Shili", category: "浙菜", categoryEn: "Zhejiang", location: "万象前海", locationEn: "MixC Qianhai", distance: "3.7km", distanceEn: "3.7km", avgPrice: 453, rooms: "多个包间", roomsEn: "Multiple rooms", description: "高端江浙时鲜，环境极具艺术感，适合顶级商务社交。", descriptionEn: "High-end Jiangnan seasonal seafood with an artistic vibe, perfect for top-tier social events." },
-  { name: "禧粤荟·现代粤菜·外烩·生日宴(宝安店)", nameEn: "Xiyuehui", category: "私房菜", categoryEn: "Private Kitchen", location: "坪洲", locationEn: "Pingzhou", distance: "4.1km", distanceEn: "4.1km", avgPrice: 316, rooms: "多个包间，最大容纳30人", roomsEn: "Multiple rooms, up to 30 pax", description: "精致粤式私房菜，私密性极高，适合私密商务洽谈。", descriptionEn: "Exquisite Cantonese private kitchen with high privacy, ideal for confidential talks." },
+  { name: "六个大厨·秘制粤菜(前海壹方城店)", nameEn: "Six Chefs Cantonese", category: "粤菜", categoryEn: "Cantonese", location: "壹方城", locationEn: "Uniwalk", distance: "2.5km", distanceEn: "2.5km", avgPrice: 127, rooms: "多个包间，最大容纳20人", roomsEn: "Multiple rooms, up to 20 pax", description: "传统粤菜功底，包间容纳度高，适合中型团队聚会。", descriptionEn: "Traditional Cantonese skills with high room capacity, suitable for mid-sized groups.", teamBuilding: true },
+  { name: "花悦庭CHEF•现代浙菜(前海壹方汇店)", nameEn: "Huayueting Chef", category: "浙菜", categoryEn: "Zhejiang", location: "前海壹方汇", locationEn: "Qianhai One Excellence", distance: "3.7km", distanceEn: "3.7km", avgPrice: 300, rooms: "多个包间，最大容纳45人", roomsEn: "Multiple rooms, up to 45 pax", description: "现代浙菜典范，装修大气，适合正式商务宴请及家宴。", descriptionEn: "A model of modern Zhejiang cuisine, grand decor for formal business and family banquets.", teamBuilding: true },
+  { name: "水岸十里·江海时鲜(万象前海店)", nameEn: "Shuian Shili", category: "浙菜", categoryEn: "Zhejiang", location: "万象前海", locationEn: "MixC Qianhai", distance: "3.7km", distanceEn: "3.7km", avgPrice: 453, rooms: "多个包间", roomsEn: "Multiple rooms", description: "高端江浙时鲜，环境极具艺术感，适合顶级商务社交。", descriptionEn: "High-end Jiangnan seasonal seafood with an artistic vibe, perfect for top-tier social events.", teamBuilding: true },
+  { name: "禧粤荟·现代粤菜·外烩·生日宴(宝安店)", nameEn: "Xiyuehui", category: "私房菜", categoryEn: "Private Kitchen", location: "坪洲", locationEn: "Pingzhou", distance: "4.1km", distanceEn: "4.1km", avgPrice: 316, rooms: "多个包间，最大容纳30人", roomsEn: "Multiple rooms, up to 30 pax", description: "精致粤式私房菜，私密性极高，适合私密商务洽谈。", descriptionEn: "Exquisite Cantonese private kitchen with high privacy, ideal for confidential talks.", teamBuilding: true },
   { name: "顺德渔村(湾区之眼店)", nameEn: "Shunde Fishing Village", category: "顺德菜", categoryEn: "Shunde", location: "湾区之眼", locationEn: "Eye of the Bay", distance: "2.1km", distanceEn: "2.1km", avgPrice: 142, rooms: "无", roomsEn: "None", description: "正宗顺德味道，大厅宽敞，适合非正式的团队聚餐。", descriptionEn: "Authentic Shunde taste with a spacious hall, suitable for informal team gatherings." },
   { name: "金鹏小渔村·粤菜·海鲜·早茶(宝安中心店)", nameEn: "Jinpeng Little Village", category: "粤式茶点", categoryEn: "Dim Sum", location: "宝安中心", locationEn: "Bao'an Center", distance: "2.7km", distanceEn: "2.7km", avgPrice: 91, rooms: "多个包间，最大容纳20人", roomsEn: "Multiple rooms, up to 20 pax", description: "老牌粤式茶点，包间大，适合团队早茶或家庭聚会。", descriptionEn: "Classic Cantonese dim sum with large rooms, great for team breakfast or family." },
   { name: "鸿荣發·深圳味道(宝安店)", nameEn: "Hongrongfa", category: "粤菜", categoryEn: "Cantonese", location: "宝华", locationEn: "Baohua", distance: "2.4km", distanceEn: "2.4km", avgPrice: 116, rooms: "多个包间", roomsEn: "Multiple rooms", description: "经典深圳味道，菜系丰富，适合各类规模的团队聚餐。", descriptionEn: "Classic Shenzhen local taste with a rich menu, suitable for all team sizes." },
@@ -182,7 +208,7 @@ var RESTAURANTS=[
   { name: "肥强·顺德干蒸(前海hop天地店)", nameEn: "Feiqiang Shunde Steamed", category: "顺德菜", categoryEn: "Shunde", location: "前海HOP", locationEn: "Qianhai HOP", distance: "2.5km", distanceEn: "2.5km", avgPrice: 70, rooms: "无", roomsEn: "None", description: "顺德特色干蒸，出餐快，适合高效率的工作简餐。", descriptionEn: "Shunde specialty steamed dishes, fast service, ideal for efficient work lunches." },
   { name: "靠山·客家菜(前海壹方城店)", nameEn: "Kaoshan Hakka", category: "客家菜", categoryEn: "Hakka", location: "壹方城", locationEn: "Uniwalk", distance: "2.7km", distanceEn: "2.7km", avgPrice: 100, rooms: "多个包间", roomsEn: "Multiple rooms", description: "传统客家风味，包间温馨，适合部门日常聚餐。", descriptionEn: "Traditional Hakka flavors with cozy rooms, suitable for daily department meals." },
   { name: "金章阿一鲍鱼·潮粤菜·手工点心", nameEn: "Ah Yat Abalone", category: "潮汕菜", categoryEn: "Teochew", location: "前海", locationEn: "Qianhai", distance: "3.8km", distanceEn: "3.8km", avgPrice: 140, rooms: "多个包间", roomsEn: "Multiple rooms", description: "潮粤名店，食材考究，包间环境好，适合商务及家宴。", descriptionEn: "Famous Teochew-Cantonese spot with quality ingredients and nice rooms for business." },
-  { name: "MetPetal遇见花瓣(欢乐港湾店)", nameEn: "MetPetal", category: "西餐", categoryEn: "Western", location: "欢乐港湾", locationEn: "OH Bay", distance: "2.3km", distanceEn: "2.3km", avgPrice: 150, rooms: "8-12人包间", roomsEn: "8-12 pax rooms", description: "花艺主题西餐，环境浪漫，设有包间，适合女性团建或约会。", descriptionEn: "Floral-themed Western dining, romantic vibe with rooms, great for team building." },
+  { name: "MetPetal遇见花瓣(欢乐港湾店)", nameEn: "MetPetal", category: "西餐", categoryEn: "Western", location: "欢乐港湾", locationEn: "OH Bay", distance: "2.3km", distanceEn: "2.3km", avgPrice: 150, rooms: "8-12人包间", roomsEn: "8-12 pax rooms", description: "花艺主题西餐，环境浪漫，设有包间，适合女性团建或约会。", descriptionEn: "Floral-themed Western dining, romantic vibe with rooms, great for team building.", teamBuilding: true },
   { name: "79号渔船海鲜饭店(宝安店)", nameEn: "No.79 Fishing Boat", category: "海鲜", categoryEn: "Seafood", location: "前海HOP", locationEn: "Qianhai HOP", distance: "2.5km", distanceEn: "2.5km", avgPrice: 170, rooms: "多个包间", roomsEn: "Multiple rooms", description: "超人气海鲜超市模式，现点现做，包间多，适合热闹团建。", descriptionEn: "Super popular seafood market style, fresh and made-to-order, great for lively parties." },
   { name: "利宝阁喜宴(宝安壹方城店)", nameEn: "Lei Garden", category: "粤菜", categoryEn: "Cantonese", location: "壹方城", locationEn: "Uniwalk", distance: "2.5km", distanceEn: "2.5km", avgPrice: 120, rooms: "15-20人包间", roomsEn: "15-20 pax rooms", description: "正宗港式粤菜，包间宽敞，适合大型团队聚餐或宴请。", descriptionEn: "Authentic HK-style Cantonese, spacious rooms for large group meals or banquets." },
   { name: "椿庐 ChunLounge(壹方汇店)", nameEn: "ChunLounge", category: "川菜", categoryEn: "Sichuan", location: "前海壹方汇", locationEn: "Qianhai One Excellence", distance: "3.6km", distanceEn: "3.6km", avgPrice: 260, rooms: "有包间", roomsEn: "Has rooms", description: "高端精致川菜，环境清幽，适合对品质有要求的商务宴请。", descriptionEn: "High-end Sichuan cuisine with a quiet environment, for quality-conscious business." },
@@ -192,198 +218,30 @@ var RESTAURANTS=[
   { name: "隐厨(前海壹方城店)", nameEn: "Hidden Kitchen", category: "湘菜", categoryEn: "Hunan", location: "壹方城", locationEn: "Uniwalk", distance: "2.6km", distanceEn: "2.6km", avgPrice: 105, rooms: "6-10人包间", roomsEn: "6-10 pax rooms", description: "精致湘菜，装修有格调，包间适中，适合部门日常聚餐。", descriptionEn: "Refined Hunan cuisine with stylish decor and medium rooms for daily team meals." },
 ];
 var FUN_SPOTS=[
-  { 
-    name: "昀湾文体中心", nameEn: "Yunwan Sports Center", 
-    category: "运动健身", categoryEn: "Sports & Fitness", 
-    location: "企鹅岛(近)", locationEn: "Penguin Island (Near)", 
-    distance: "300m", distanceEn: "300m", 
-    description: "含篮球、羽毛球、乒乓球、壁球馆及健身房。员工工作日全天及周末8:00-14:00免费。", 
-    descriptionEn: "Includes basketball, badminton, table tennis, squash & gym. Free for staff on weekdays & weekends 8:00-14:00." 
-  },
-  { 
-    name: "金色印象·按摩足疗·LIFE主题(财富港店)", nameEn: "Golden Impression Massage", 
-    category: "休闲放松", categoryEn: "Relaxation", 
-    location: "财富港", locationEn: "Caifugang", 
-    distance: "2.5km", distanceEn: "2.5km", 
-    description: "按摩、自助美食、电影，适合高强度工作后的彻底放松。", 
-    descriptionEn: "Massage, buffet, and movies. Perfect for deep relaxation after high-intensity work." 
-  },
-  { 
-    name: "屿island ·精油SPA·按摩(宝安中心壹方城店)", nameEn: "Island SPA", 
-    category: "休闲放松", categoryEn: "Relaxation", 
-    location: "壹方城", locationEn: "Uniwalk", 
-    distance: "3km", distanceEn: "3km", 
-    description: "专业精油SPA，环境静谧，适合解压。", 
-    descriptionEn: "Professional essential oil SPA with a quiet environment for stress relief." 
-  },
-  { 
-    name: "伊香园•足道•轻奢Spa•颐韵轩(碧海湾店)", nameEn: "Yixiangyuan Foot Spa", 
-    category: "休闲放松", categoryEn: "Relaxation", 
-    location: "碧海湾", locationEn: "Bihaiwan", 
-    distance: "2.7km", distanceEn: "2.7km", 
-    description: "推拿、SPA，手法专业，性价比高。", 
-    descriptionEn: "Massage and SPA with professional techniques and high cost-performance." 
-  },
-  { 
-    name: "栊静·蘭予传统泰式按摩(宝安中心店)", nameEn: "Longjing Thai Massage", 
-    category: "休闲放松", categoryEn: "Relaxation", 
-    location: "宝安中心", locationEn: "Bao'an Center", 
-    distance: "3.3km", distanceEn: "3.3km", 
-    description: "传统泰式按摩，拉伸效果好。", 
-    descriptionEn: "Traditional Thai massage with excellent stretching effects." 
-  },
-  { 
-    name: "UK BLACK KTV(壹方城店)", nameEn: "UK BLACK KTV", 
-    category: "娱乐聚会", categoryEn: "Entertainment", 
-    location: "壹方城", locationEn: "Uniwalk", 
-    distance: "2.9km", distanceEn: "2.9km", 
-    description: "高端KTV，音响设备先进。人均100元左右。", 
-    descriptionEn: "High-end KTV with advanced sound equipment. Around ¥100/pax." 
-  },
-  { 
-    name: "魅KTV 旗舰店·AI辅唱(坪洲财富港店)", nameEn: "Mei KTV Flagship", 
-    category: "娱乐聚会", categoryEn: "Entertainment", 
-    location: "财富港", locationEn: "Caifugang", 
-    distance: "2.5km", distanceEn: "2.5km", 
-    description: "AI辅唱特色，科技感强。人均70元左右。", 
-    descriptionEn: "AI-assisted singing features with a tech vibe. Around ¥70/pax." 
-  },
-  { 
-    name: "上 Shang KTV(宝安HOP天地店)", nameEn: "Shang KTV", 
-    category: "娱乐聚会", categoryEn: "Entertainment", 
-    location: "前海HOP", locationEn: "Qianhai HOP", 
-    distance: "2.8km", distanceEn: "2.8km", 
-    description: "氛围感极佳，适合部门聚会。人均105元左右。", 
-    descriptionEn: "Great atmosphere, suitable for department gatherings. Around ¥105/pax." 
-  },
-  { 
-    name: "茶境Tea realm", nameEn: "Tea Realm", 
-    category: "休闲放松", categoryEn: "Relaxation", 
-    location: "欢乐港湾", locationEn: "OH Bay", 
-    distance: "2.9km", distanceEn: "2.9km", 
-    description: "精致茶室，环境清幽。人均106元左右。", 
-    descriptionEn: "Exquisite tea house with a quiet environment. Around ¥106/pax." 
-  },
-  { 
-    name: "八马茶业·茶馆茶室(宝安万豪旗舰店)", nameEn: "Bama Tea House", 
-    category: "休闲放松", categoryEn: "Relaxation", 
-    location: "宝华", locationEn: "Baohua", 
-    distance: "2.1km", distanceEn: "2.1km", 
-    description: "传统名茶，适合商务对谈。人均60元左右。", 
-    descriptionEn: "Traditional famous tea, suitable for business talks. Around ¥60/pax." 
-  },
-  { 
-    name: "雨林古树茶·茶馆(宝安中心店)", nameEn: "Rainforest Ancient Tree Tea", 
-    category: "休闲放松", categoryEn: "Relaxation", 
-    location: "宝安中心", locationEn: "Bao'an Center", 
-    distance: "3km", distanceEn: "3km", 
-    description: "古树茶特色，韵味深厚。人均74元左右。", 
-    descriptionEn: "Specializing in ancient tree tea with deep flavors. Around ¥74/pax." 
-  },
-  { 
-    name: "聚绘陶艺· 拼豆·油画·DIY团建(壹方城店)", nameEn: "Juhui Pottery DIY", 
-    category: "创意手作", categoryEn: "DIY Workshop", 
-    location: "壹方城", locationEn: "Uniwalk", 
-    distance: "3km", distanceEn: "3km", 
-    description: "陶艺、拼豆、油画，适合团队DIY。人均78元左右。", 
-    descriptionEn: "Pottery, Perler beads, and oil painting for team DIY. Around ¥78/pax." 
-  },
-  { 
-    name: "idou拼豆·DIY手作(宝安中心店)", nameEn: "idou DIY Studio", 
-    category: "创意手作", categoryEn: "DIY Workshop", 
-    location: "宝华", locationEn: "Baohua", 
-    distance: "3km", distanceEn: "3km", 
-    description: "专注拼豆手作，解压有趣。人均50元左右。", 
-    descriptionEn: "Focused on Perler beads, relaxing and fun. Around ¥50/pax." 
-  },
-  { 
-    name: "夜莺的匣子·DIY玻璃工坊", nameEn: "Nightingale's Box Glass DIY", 
-    category: "创意手作", categoryEn: "DIY Workshop", 
-    location: "宝华", locationEn: "Baohua", 
-    distance: "3km", distanceEn: "3km", 
-    description: "烧玻璃、吹玻璃体验，极具特色。人均300元左右。", 
-    descriptionEn: "Glass blowing and burning experience, very unique. Around ¥300/pax." 
-  },
-  { 
-    name: "湾区之光摩天轮", nameEn: "Bay Glory Ferris Wheel", 
-    category: "地标景观", categoryEn: "Landmark", 
-    location: "欢乐港湾", locationEn: "OH Bay", 
-    distance: "驾车6.7km", distanceEn: "6.7km Drive", 
-    description: "国内首个全天景轿厢摩天轮，俯瞰企鹅岛全景。", 
-    descriptionEn: "China's first panoramic sky-view Ferris wheel with views of Penguin Island." 
-  },
-  { 
-    name: "钟书阁(欢乐港湾店)", nameEn: "Zhongshuge Bookstore", 
-    category: "文化休闲", categoryEn: "Culture", 
-    location: "欢乐港湾", locationEn: "OH Bay", 
-    distance: "驾车4.9km", distanceEn: "4.9km Drive", 
-    description: "网红书店，螺旋书架设计极具视觉冲击力。", 
-    descriptionEn: "Trendy bookstore with a stunning spiral staircase bookshelf design." 
-  },
-  { 
-    name: "滨海廊桥", nameEn: "Binhai Skywalk", 
-    category: "户外散步", categoryEn: "Outdoor Walk", 
-    location: "宝安中心区", locationEn: "Bao'an Center", 
-    distance: "驾车4.1km", distanceEn: "4.1km Drive", 
-    description: "连接体育馆、图书馆与欢乐港湾的空中绿道。", 
-    descriptionEn: "An elevated greenway connecting the stadium, library, and OH Bay." 
-  },
-  { 
-    name: "前海石公园", nameEn: "Qianhai Stone Park", 
-    category: "公园绿地", categoryEn: "Park", 
-    location: "前海", locationEn: "Qianhai", 
-    distance: "驾车8.6km", distanceEn: "8.6km Drive", 
-    description: "看日落的绝佳地点，也是前海标志性打卡地。", 
-    descriptionEn: "A prime sunset viewing spot and an iconic landmark of Qianhai." 
-  },
-  { 
-    name: "宝安图书馆", nameEn: "Bao'an Library", 
-    category: "文化休闲", categoryEn: "Culture", 
-    location: "宝华", locationEn: "Baohua", 
-    distance: "2.4km", distanceEn: "2.4km", 
-    description: "建筑设计精美，环境安静，适合深度阅读。", 
-    descriptionEn: "Beautiful architecture and quiet environment, perfect for deep reading." 
-  },
-  { 
-    name: "宝安青少年宫", nameEn: "Bao'an Youth Palace", 
-    category: "文化休闲", categoryEn: "Culture", 
-    location: "宝华", locationEn: "Baohua", 
-    distance: "2.3km", distanceEn: "2.3km", 
-    description: "丰富的文化活动与展览空间。", 
-    descriptionEn: "Rich cultural activities and exhibition spaces." 
-  },
-  { 
-    name: "超级猩猩健身·私教(宝安丽晶国际店)", nameEn: "Supermonkey Fitness (Regent)", 
-    category: "运动健身", categoryEn: "Sports & Fitness", 
-    location: "宝安中心", locationEn: "Bao'an Center", 
-    distance: "3.2km", distanceEn: "3.2km", 
-    description: "专业私教课程，环境高端。", 
-    descriptionEn: "Professional personal training courses in a high-end environment." 
-  },
-  { 
-    name: "乐刻运动健身(宝安大仟里店)", nameEn: "Leke Fitness (Daqianli)", 
-    category: "运动健身", categoryEn: "Sports & Fitness", 
-    location: "大仟里", locationEn: "Daqianli", 
-    distance: "3.1km", distanceEn: "3.1km", 
-    description: "24小时健身，性价比极高。", 
-    descriptionEn: "24-hour fitness with excellent cost-performance." 
-  },
-  { 
-    name: "乐刻运动健身(宝安前海壹方城店)", nameEn: "Leke Fitness (Uniwalk)", 
-    category: "运动健身", categoryEn: "Sports & Fitness", 
-    location: "壹方城", locationEn: "Uniwalk", 
-    distance: "2.9km", distanceEn: "2.9km", 
-    description: "位于核心商圈，方便快捷。", 
-    descriptionEn: "Located in the core business district, convenient and fast." 
-  },
-  { 
-    name: "超级猩猩健身·团课·瑜伽(梧桐村店)", nameEn: "Supermonkey Yoga (Wutong)", 
-    category: "运动健身", categoryEn: "Sports & Fitness", 
-    location: "宝华", locationEn: "Baohua", 
-    distance: "3.1km", distanceEn: "3.1km", 
-    description: "特色团课与瑜伽，氛围感强。", 
-    descriptionEn: "Specialized group classes and yoga with a great vibe." 
-  },
+  { name: "昀湾文体中心", nameEn: "Yunwan Sports Center", category: "运动健身", categoryEn: "Sports & Fitness", location: "企鹅岛(近)", locationEn: "Penguin Island (Near)", distance: "300m", distanceEn: "300m", description: "含篮球、羽毛球、乒乓球、壁球馆及健身房。员工工作日全天及周末8:00-14:00免费。", descriptionEn: "Includes basketball, badminton, table tennis, squash & gym. Free for staff on weekdays & weekends 8:00-14:00." },
+  { name: "金色印象·按摩足疗·LIFE主题(财富港店)", nameEn: "Golden Impression Massage", category: "休闲放松", categoryEn: "Relaxation", location: "财富港", locationEn: "Caifugang", distance: "2.5km", distanceEn: "2.5km", description: "按摩、自助美食、电影，适合高强度工作后的彻底放松。", descriptionEn: "Massage, buffet, and movies. Perfect for deep relaxation after high-intensity work." },
+  { name: "屿island ·精油SPA·按摩(宝安中心壹方城店)", nameEn: "Island SPA", category: "休闲放松", categoryEn: "Relaxation", location: "壹方城", locationEn: "Uniwalk", distance: "3km", distanceEn: "3km", description: "专业精油SPA，环境静谧，适合解压。", descriptionEn: "Professional essential oil SPA with a quiet environment for stress relief." },
+  { name: "伊香园•足道•轻奢Spa•颐韵轩(碧海湾店)", nameEn: "Yixiangyuan Foot Spa", category: "休闲放松", categoryEn: "Relaxation", location: "碧海湾", locationEn: "Bihaiwan", distance: "2.7km", distanceEn: "2.7km", description: "推拿、SPA，手法专业，性价比高。", descriptionEn: "Massage and SPA with professional techniques and high cost-performance." },
+  { name: "栊静·蘭予传统泰式按摩(宝安中心店)", nameEn: "Longjing Thai Massage", category: "休闲放松", categoryEn: "Relaxation", location: "宝安中心", locationEn: "Bao'an Center", distance: "3.3km", distanceEn: "3.3km", description: "传统泰式按摩，拉伸效果好。", descriptionEn: "Traditional Thai massage with excellent stretching effects." },
+  { name: "UK BLACK KTV(壹方城店)", nameEn: "UK BLACK KTV", category: "娱乐聚会", categoryEn: "Entertainment", location: "壹方城", locationEn: "Uniwalk", distance: "2.9km", distanceEn: "2.9km", description: "高端KTV，音响设备先进。人均100元左右。", descriptionEn: "High-end KTV with advanced sound equipment. Around ¥100/pax." },
+  { name: "魅KTV 旗舰店·AI辅唱(坪洲财富港店)", nameEn: "Mei KTV Flagship", category: "娱乐聚会", categoryEn: "Entertainment", location: "财富港", locationEn: "Caifugang", distance: "2.5km", distanceEn: "2.5km", description: "AI辅唱特色，科技感强。人均70元左右。", descriptionEn: "AI-assisted singing features with a tech vibe. Around ¥70/pax." },
+  { name: "上 Shang KTV(宝安HOP天地店)", nameEn: "Shang KTV", category: "娱乐聚会", categoryEn: "Entertainment", location: "前海HOP", locationEn: "Qianhai HOP", distance: "2.8km", distanceEn: "2.8km", description: "氛围感极佳，适合部门聚会。人均105元左右。", descriptionEn: "Great atmosphere, suitable for department gatherings. Around ¥105/pax." },
+  { name: "茶境Tea realm", nameEn: "Tea Realm", category: "休闲放松", categoryEn: "Relaxation", location: "欢乐港湾", locationEn: "OH Bay", distance: "2.9km", distanceEn: "2.9km", description: "精致茶室，环境清幽。人均106元左右。", descriptionEn: "Exquisite tea house with a quiet environment. Around ¥106/pax." },
+  { name: "八马茶业·茶馆茶室(宝安万豪旗舰店)", nameEn: "Bama Tea House", category: "休闲放松", categoryEn: "Relaxation", location: "宝华", locationEn: "Baohua", distance: "2.1km", distanceEn: "2.1km", description: "传统名茶，适合商务对谈。人均60元左右。", descriptionEn: "Traditional famous tea, suitable for business talks. Around ¥60/pax." },
+  { name: "雨林古树茶·茶馆(宝安中心店)", nameEn: "Rainforest Ancient Tree Tea", category: "休闲放松", categoryEn: "Relaxation", location: "宝安中心", locationEn: "Bao'an Center", distance: "3km", distanceEn: "3km", description: "古树茶特色，韵味深厚。人均74元左右。", descriptionEn: "Specializing in ancient tree tea with deep flavors. Around ¥74/pax." },
+  { name: "聚绘陶艺· 拼豆·油画·DIY团建(壹方城店)", nameEn: "Juhui Pottery DIY", category: "创意手作", categoryEn: "DIY Workshop", location: "壹方城", locationEn: "Uniwalk", distance: "3km", distanceEn: "3km", description: "陶艺、拼豆、油画，适合团队DIY。人均78元左右。", descriptionEn: "Pottery, Perler beads, and oil painting for team DIY. Around ¥78/pax." },
+  { name: "idou拼豆·DIY手作(宝安中心店)", nameEn: "idou DIY Studio", category: "创意手作", categoryEn: "DIY Workshop", location: "宝华", locationEn: "Baohua", distance: "3km", distanceEn: "3km", description: "专注拼豆手作，解压有趣。人均50元左右。", descriptionEn: "Focused on Perler beads, relaxing and fun. Around ¥50/pax." },
+  { name: "夜莺的匣子·DIY玻璃工坊", nameEn: "Nightingale's Box Glass DIY", category: "创意手作", categoryEn: "DIY Workshop", location: "宝华", locationEn: "Baohua", distance: "3km", distanceEn: "3km", description: "烧玻璃、吹玻璃体验，极具特色。人均300元左右。", descriptionEn: "Glass blowing and burning experience, very unique. Around ¥300/pax." },
+  { name: "湾区之光摩天轮", nameEn: "Bay Glory Ferris Wheel", category: "地标景观", categoryEn: "Landmark", location: "欢乐港湾", locationEn: "OH Bay", distance: "驾车6.7km", distanceEn: "6.7km Drive", description: "国内首个全天景轿厢摩天轮，俯瞰企鹅岛全景。", descriptionEn: "China's first panoramic sky-view Ferris wheel with views of Penguin Island." },
+  { name: "钟书阁(欢乐港湾店)", nameEn: "Zhongshuge Bookstore", category: "文化休闲", categoryEn: "Culture", location: "欢乐港湾", locationEn: "OH Bay", distance: "驾车4.9km", distanceEn: "4.9km Drive", description: "网红书店，螺旋书架设计极具视觉冲击力。", descriptionEn: "Trendy bookstore with a stunning spiral staircase bookshelf design." },
+  { name: "滨海廊桥", nameEn: "Binhai Skywalk", category: "户外散步", categoryEn: "Outdoor Walk", location: "宝安中心区", locationEn: "Bao'an Center", distance: "驾车4.1km", distanceEn: "4.1km Drive", description: "连接体育馆、图书馆与欢乐港湾的空中绿道。", descriptionEn: "An elevated greenway connecting the stadium, library, and OH Bay." },
+  { name: "前海石公园", nameEn: "Qianhai Stone Park", category: "公园绿地", categoryEn: "Park", location: "前海", locationEn: "Qianhai", distance: "驾车8.6km", distanceEn: "8.6km Drive", description: "看日落的绝佳地点，也是前海标志性打卡地。", descriptionEn: "A prime sunset viewing spot and an iconic landmark of Qianhai." },
+  { name: "宝安图书馆", nameEn: "Bao'an Library", category: "文化休闲", categoryEn: "Culture", location: "宝华", locationEn: "Baohua", distance: "2.4km", distanceEn: "2.4km", description: "建筑设计精美，环境安静，适合深度阅读。", descriptionEn: "Beautiful architecture and quiet environment, perfect for deep reading." },
+  { name: "宝安青少年宫", nameEn: "Bao'an Youth Palace", category: "文化休闲", categoryEn: "Culture", location: "宝华", locationEn: "Baohua", distance: "2.3km", distanceEn: "2.3km", description: "丰富的文化活动与展览空间。", descriptionEn: "Rich cultural activities and exhibition spaces." },
+  { name: "超级猩猩健身·私教(宝安丽晶国际店)", nameEn: "Supermonkey Fitness (Regent)", category: "运动健身", categoryEn: "Sports & Fitness", location: "宝安中心", locationEn: "Bao'an Center", distance: "3.2km", distanceEn: "3.2km", description: "专业私教课程，环境高端。", descriptionEn: "Professional personal training courses in a high-end environment." },
+  { name: "乐刻运动健身(宝安大仟里店)", nameEn: "Leke Fitness (Daqianli)", category: "运动健身", categoryEn: "Sports & Fitness", location: "大仟里", locationEn: "Daqianli", distance: "3.1km", distanceEn: "3.1km", description: "24小时健身，性价比极高。", descriptionEn: "24-hour fitness with excellent cost-performance." },
+  { name: "乐刻运动健身(宝安前海壹方城店)", nameEn: "Leke Fitness (Uniwalk)", category: "运动健身", categoryEn: "Sports & Fitness", location: "壹方城", locationEn: "Uniwalk", distance: "2.9km", distanceEn: "2.9km", description: "位于核心商圈，方便快捷。", descriptionEn: "Located in the core business district, convenient and fast." },
+  { name: "超级猩猩健身·团课·瑜伽(梧桐村店)", nameEn: "Supermonkey Yoga (Wutong)", category: "运动健身", categoryEn: "Sports & Fitness", location: "宝华", locationEn: "Baohua", distance: "3.1km", distanceEn: "3.1km", description: "特色团课与瑜伽，氛围感强。", descriptionEn: "Specialized group classes and yoga with a great vibe." },
 ];
 var TEAM_BUILDING=[
   { name: "深圳舜和国际酒店(宝安坪洲地铁站店)", nameEn: "Shunhe International Hotel", location: "坪洲", locationEn: "Pingzhou", distance: "驾车5.3公里", distanceEn: "5.3km Drive", price: "250-350", priceEn: "250-350", facilities: "宴会厅&泳池", facilitiesEn: "Banquet Hall & Pool", priceValue: 300 },
@@ -399,79 +257,44 @@ var TEAM_BUILDING=[
   { name: "深圳前海华侨城JW万豪酒店", nameEn: "JW Marriott Hotel Shenzhen Bao'an", location: "宝华", locationEn: "Baohua", distance: "驾车5.5公里", distanceEn: "5.5km Drive", price: "1100-1300", priceEn: "1100-1300", facilities: "宴会厅&多功能厅&泳池", facilitiesEn: "Banquet Hall, Multi-function Hall & Pool", priceValue: 1200 },
 ];
 
-
+// ─────────────────────────────────────────
+// URL 生成
+// ─────────────────────────────────────────
 var lang = 'zh';
 var currentTab = 'hotel';
 var expandedCat = {hotel: null, dining: null, fun: null, team: null};
 var searchQ = '';
 
-var I18N = {
-  zh: {
-    title: 'IEG Global · 企鹅岛生活指南',
-    sub: '入驻企鹅岛，开启高效生活新篇章',
-    tabs: ['🏨 酒店住宿', '🍜 餐饮美食', '🎉 休闲娱乐', '🤝 会议团建'],
-    langBtn: 'EN',
-    search: '搜索名称、地点或类别...',
-    ftTip: '✅ 点击卡片跳转大众点评 / 必应搜索查看详情',
-    ftCopy: 'IEG Global · 企鹅岛入驻专属指南 | 2026年3月',
-    noResult: '暂无匹配结果',
-    items: '个推荐',
-    hotel: {
-      cats: [
-        {id:'eco', name:'经济型', nameEn:'Economy', icon:'💰', cls:'c-emerald', desc:'性价比之选，适合预算有限或短期落脚。¥250以下。', descEn:'Budget-friendly, ideal for short stays. Under ¥250/night.'},
-        {id:'biz', name:'商务型', nameEn:'Business', icon:'⭐', cls:'c-brand', desc:'品质均衡，设施齐全，适合出差或家庭出行。¥250–600。', descEn:'Balanced quality, full amenities. ¥250–600/night.'},
-        {id:'lux', name:'高档/豪华', nameEn:'Luxury', icon:'✨', cls:'c-dark', desc:'顶级服务，地理位置优越，适合追求极致体验。¥600+。', descEn:'Premium service, prime locations. ¥600+/night.'}
-      ],
-      filter: function(h, id) {
-        if (id==='eco') return h.priceValue < 250;
-        if (id==='biz') return h.priceValue >= 250 && h.priceValue <= 600;
-        return h.priceValue > 600;
-      }
-    },
-    dining: {
-      cats: [
-        {id:'fine', name:'商务宴请 / 精致餐饮', nameEn:'Business Dining', icon:'🍷', cls:'c-dark', desc:'高客单价，环境优美，多设包间，适合商务接待。人均¥200+。', descEn:'High-end with private rooms, ideal for business entertainment. Avg ¥200+.'},
-        {id:'gathering', name:'团队聚餐 / 特色风味', nameEn:'Team Gathering', icon:'👥', cls:'c-brand', desc:'口味地道，氛围轻松，适合部门团建或朋友小聚。人均¥100–200。', descEn:'Authentic flavors, relaxed atmosphere. Avg ¥100–200.'},
-        {id:'casual', name:'便捷工作餐 / 休闲简餐', nameEn:'Quick Bites', icon:'☕', cls:'c-emerald', desc:'出餐快，性价比高，适合日常午餐或工作简餐。人均¥100以下。', descEn:'Fast, affordable, great for daily lunch. Avg under ¥100.'}
-      ],
-      filter: function(r, id) {
-        if (r.manualTier) return r.manualTier === id;
-        if (id==='fine') return r.avgPrice >= 200;
-        if (id==='gathering') return r.avgPrice >= 100 && r.avgPrice < 200;
-        return r.avgPrice < 100;
-      }
-    },
-    fun: {
-      cats: [
-        {id:'sports', name:'运动健身', nameEn:'Sports & Fitness', icon:'🏃', cls:'c-brand', desc:'园区内及周边运动设施，员工部分时段免费开放。', descEn:'Sports facilities on campus and nearby, some free for staff.'},
-        {id:'relax', name:'休闲放松', nameEn:'Relax & Unwind', icon:'💆', cls:'c-emerald', desc:'足疗、按摩、茶馆，工作日后的最佳放松方式。', descEn:'Foot massage, spa, teahouses — perfect after-work wind-down.'},
-        {id:'entertainment', name:'娱乐聚会', nameEn:'Entertainment', icon:'🎤', cls:'c-amber', desc:'KTV、DIY工坊，适合团队欢乐时光。', descEn:'KTV, DIY workshops — great for team bonding and fun.'},
-        {id:'outdoor', name:'地标 / 户外 / 文化', nameEn:'Landmarks & Culture', icon:'🌊', cls:'c-dark', desc:'周边地标、公园、文化场所，探索前海魅力。', descEn:'Scenic spots, parks and cultural venues around Qianhai.'}
-      ],
-      filter: function(s, id) {
-        if (id==='sports') return s.category === '运动健身';
-        if (id==='relax') return s.category === '休闲放松';
-        if (id==='entertainment') return s.category === '娱乐聚会' || s.category === '创意手作';
-        return ['地标景观','文化休闲','户外散步','公园绿地','科技参观'].indexOf(s.category) >= 0;
-      }
-    },
-    team: {
-      cats: [
-        {id:'venue', name:'团建场地 / 会议酒店', nameEn:'Team Building Venues', icon:'🏢', cls:'c-brand', desc:'具备宴会厅、会议室或户外场地的酒店，适合大型团建活动。', descEn:'Hotels with banquet halls or meeting rooms for large team events.'}
-      ],
-      filter: function(t, id) { return true; }
-    }
-  }
-};
-// EN is same structure, just with different display text — we swap name fields dynamically
+// 大众点评 PC 搜索（深圳城市码=7，稳定可用）
+// 百度搜索 酒店名+携程
+function ctripUrl(name) { return 'https://www.baidu.com/s?wd=' + encodeURIComponent(name + ' 携程'); }
+function dpUrl(name)   { return 'https://www.dianping.com/search/keyword/7/0_' + encodeURIComponent(name); }
+function bingUrl(name) { return 'https://www.dianping.com/search/keyword/7/0_' + encodeURIComponent(name); }
+function funUrl(name)  { return 'https://www.dianping.com/search/keyword/7/0_' + encodeURIComponent(name); }
+function teamUrl(name) { return 'https://www.dianping.com/search/keyword/7/0_' + encodeURIComponent(name); }
 
-function n(obj) { return (lang==='en' && obj.nameEn) ? obj.nameEn : obj.name; }
-function loc(obj) { return (lang==='en' && obj.locationEn) ? obj.locationEn : obj.location; }
-function dist(obj) { return (lang==='en' && obj.distanceEn) ? obj.distanceEn : obj.distance; }
-function cat(obj) { return (lang==='en' && obj.categoryEn) ? obj.categoryEn : obj.category; }
-function desc(obj) { return (lang==='en' && obj.descriptionEn) ? obj.descriptionEn : (obj.description||''); }
+// 腾讯地图 - 导航（从企鹅岛出发，含精确坐标时更准）
+function txNavUrl(name, toLat, toLng) {
+  var url = 'https://apis.map.qq.com/uri/v1/routeplan?type=drive'
+    + '&from=企鹅岛云海大厦&fromcoord=' + BASE_LAT + ',' + BASE_LNG
+    + '&to=' + encodeURIComponent(name)
+    + '&policy=1&referer=' + TXMAP_KEY;
+  if (toLat && toLng) url += '&tocoord=' + toLat + ',' + toLng;
+  return url;
+}
+
+function esc(s) { return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+// ─────────────────────────────────────────
+// 字段辅助
+// ─────────────────────────────────────────
+function n(obj)     { return (lang==='en' && obj.nameEn) ? obj.nameEn : obj.name; }
+function loc(obj)   { return (lang==='en' && obj.locationEn) ? obj.locationEn : obj.location; }
+function dist(obj)  { return (lang==='en' && obj.distanceEn) ? obj.distanceEn : obj.distance; }
+function cat(obj)   { return (lang==='en' && obj.categoryEn) ? obj.categoryEn : obj.category; }
+function desc(obj)  { return (lang==='en' && obj.descriptionEn) ? obj.descriptionEn : (obj.description||''); }
 function rooms(obj) { return (lang==='en' && obj.roomsEn) ? obj.roomsEn : (obj.rooms||''); }
-function fac(obj) { return (lang==='en' && obj.facilitiesEn) ? obj.facilitiesEn : (obj.facilities||''); }
+function fac(obj)   { return (lang==='en' && obj.facilitiesEn) ? obj.facilitiesEn : (obj.facilities||''); }
 
 function matches(obj) {
   if (!searchQ) return true;
@@ -480,16 +303,22 @@ function matches(obj) {
   return fields.some(function(f){ return f && f.toLowerCase().indexOf(q) >= 0; });
 }
 
-function dpUrl(name) { return 'https://m.dianping.com/shoplist/search?from=m_search&keyword=' + encodeURIComponent(name); }
-function bingUrl(name) { return 'https://www.bing.com/search?q=' + encodeURIComponent(name + ' 携程'); }
-function funUrl(name) { return 'https://www.bing.com/search?q=' + encodeURIComponent(name + ' 深圳'); }
-function teamUrl(name) { return 'https://www.bing.com/search?q=' + encodeURIComponent(name + ' 团建'); }
+// ─────────────────────────────────────────
+// 操作按钮（导航 + 详情，二选一地图已合并入导航）
+// ─────────────────────────────────────────
+function actionBtns(itemName, detailUrl, detailLabel, detailCls) {
+  var cls = detailCls || 'ia-dp';
+  return '<div class="item-actions">' +
+    '<a class="ia-btn ia-nav" href="' + esc(txNavUrl(itemName)) + '" target="_blank" rel="noopener" onclick="event.stopPropagation()">🧭 导航</a>' +
+    '<a class="ia-btn ' + cls + '" href="' + esc(detailUrl) + '" target="_blank" rel="noopener" onclick="event.stopPropagation()">' + detailLabel + '</a>' +
+  '</div>';
+}
 
-function esc(s) { return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
-
+// ─────────────────────────────────────────
+// 卡片渲染
+// ─────────────────────────────────────────
 function renderHotel(h) {
-  return '<a class="item" href="' + bingUrl(h.name) + '" target="_blank" rel="noopener">' +
-    '<div class="ext">↗</div>' +
+  return '<div class="item">' +
     '<div class="item-name">' + esc(n(h)) + '</div>' +
     (lang==='zh' && h.nameEn ? '<div class="item-name-en">' + esc(h.nameEn) + '</div>' : '') +
     '<div class="meta">' +
@@ -497,12 +326,12 @@ function renderHotel(h) {
       '<span>🚗 ' + esc(dist(h)) + '</span>' +
       '<span class="meta-full">💴 ¥' + esc(h.price) + '</span>' +
     '</div>' +
-  '</a>';
+    actionBtns(h.name, ctripUrl(h.name), '🏨 携程预订', 'ia-ctrip') +
+  '</div>';
 }
 
 function renderRestaurant(r) {
-  return '<a class="item" href="' + dpUrl(r.name) + '" target="_blank" rel="noopener">' +
-    '<div class="ext">↗</div>' +
+  return '<div class="item">' +
     '<div class="item-name">' + esc(n(r)) + '</div>' +
     (lang==='zh' && r.nameEn ? '<div class="item-name-en">' + esc(r.nameEn) + '</div>' : '') +
     (desc(r) ? '<div class="item-desc">' + esc(desc(r)) + '</div>' : '') +
@@ -515,12 +344,12 @@ function renderRestaurant(r) {
       '<span>🚗 ' + esc(dist(r)) + '</span>' +
       (rooms(r) ? '<span class="meta-full">🚪 包间: ' + esc(rooms(r)) + '</span>' : '') +
     '</div>' +
-  '</a>';
+    actionBtns(r.name, dpUrl(r.name), '📖 点评') +
+  '</div>';
 }
 
 function renderFun(s) {
-  return '<a class="item" href="' + funUrl(s.name) + '" target="_blank" rel="noopener">' +
-    '<div class="ext">↗</div>' +
+  return '<div class="item">' +
     '<div class="item-name">' + esc(n(s)) + '</div>' +
     (lang==='zh' && s.nameEn ? '<div class="item-name-en">' + esc(s.nameEn) + '</div>' : '') +
     (desc(s) ? '<div class="item-desc">' + esc(desc(s)) + '</div>' : '') +
@@ -528,12 +357,12 @@ function renderFun(s) {
       '<span>📍 ' + esc(loc(s)) + '</span>' +
       '<span>🚗 ' + esc(dist(s)) + '</span>' +
     '</div>' +
-  '</a>';
+    actionBtns(s.name, funUrl(s.name), '🔍 搜索') +
+  '</div>';
 }
 
 function renderTeam(t) {
-  return '<a class="item" href="' + teamUrl(t.name) + '" target="_blank" rel="noopener">' +
-    '<div class="ext">↗</div>' +
+  return '<div class="item">' +
     '<div class="item-name">' + esc(n(t)) + '</div>' +
     (lang==='zh' && t.nameEn ? '<div class="item-name-en">' + esc(t.nameEn) + '</div>' : '') +
     '<div class="tags">' +
@@ -544,20 +373,88 @@ function renderTeam(t) {
       '<span>📍 ' + esc(loc(t)) + '</span>' +
       '<span>🚗 ' + esc(dist(t)) + '</span>' +
     '</div>' +
-  '</a>';
+    actionBtns(t.name, teamUrl(t.name), '🔍 搜索') +
+  '</div>';
 }
 
-function buildPane(tabId, cfg, dataset, renderFn) {
+
+// ─────────────────────────────────────────
+// 渲染框架
+// ─────────────────────────────────────────
+var I18N_CATS = {
+  hotel: {
+    cats: [
+      {id:'eco', name:'经济型', nameEn:'Economy', icon:'💰', cls:'c-emerald', desc:'性价比之选，适合预算有限或短期落脚。¥250以下。', descEn:'Budget-friendly. Under ¥250/night.'},
+      {id:'biz', name:'商务型', nameEn:'Business', icon:'⭐', cls:'c-brand', desc:'品质均衡，设施齐全，适合出差或家庭出行。¥250–600。', descEn:'Balanced quality. ¥250–600/night.'},
+      {id:'lux', name:'高档/豪华', nameEn:'Luxury', icon:'✨', cls:'c-dark', desc:'顶级服务，地理位置优越，适合追求极致体验。¥600+。', descEn:'Premium service. ¥600+/night.'}
+    ],
+    filter: function(h,id){ if(id==='eco')return h.priceValue<250; if(id==='biz')return h.priceValue>=250&&h.priceValue<=600; return h.priceValue>600; }
+  },
+  dining: {
+    cats: [
+      {id:'fine', name:'商务宴请 / 精致餐饮', nameEn:'Business Dining', icon:'🍷', cls:'c-dark', desc:'高客单价，多设包间。人均¥200+。', descEn:'High-end with private rooms. Avg ¥200+.'},
+      {id:'gathering', name:'团队聚餐 / 特色风味', nameEn:'Team Gathering', icon:'👥', cls:'c-brand', desc:'口味地道，氛围轻松。人均¥100–200。', descEn:'Authentic flavors. Avg ¥100–200.'},
+      {id:'casual', name:'便捷工作餐 / 休闲简餐', nameEn:'Quick Bites', icon:'☕', cls:'c-emerald', desc:'出餐快，性价比高。人均¥100以下。', descEn:'Fast & affordable. Avg under ¥100.'}
+    ],
+    filter: function(r,id){ if(r.manualTier)return r.manualTier===id; if(id==='fine')return r.avgPrice>=200; if(id==='gathering')return r.avgPrice>=100&&r.avgPrice<200; return r.avgPrice<100; }
+  },
+  fun: {
+    cats: [
+      {id:'sports', name:'运动健身', nameEn:'Sports & Fitness', icon:'🏃', cls:'c-brand', desc:'园区内及周边运动设施，员工部分时段免费。', descEn:'Sports facilities, some free for staff.'},
+      {id:'relax', name:'休闲放松', nameEn:'Relax & Unwind', icon:'💆', cls:'c-emerald', desc:'足疗、按摩、茶馆，下班后最佳放松方式。', descEn:'Foot massage, spa, teahouses.'},
+      {id:'entertainment', name:'娱乐聚会', nameEn:'Entertainment', icon:'🎤', cls:'c-amber', desc:'KTV、DIY工坊，适合团队欢乐时光。', descEn:'KTV, DIY workshops for team fun.'},
+      {id:'outdoor', name:'地标 / 户外 / 文化', nameEn:'Landmarks & Culture', icon:'🌊', cls:'c-dark', desc:'周边地标、公园、文化场所。', descEn:'Scenic spots and cultural venues.'}
+    ],
+    filter: function(s,id){
+      if(id==='sports')return s.category==='运动健身';
+      if(id==='relax')return s.category==='休闲放松';
+      if(id==='entertainment')return s.category==='娱乐聚会'||s.category==='创意手作';
+      return ['地标景观','文化休闲','户外散步','公园绿地','科技参观'].indexOf(s.category)>=0;
+    }
+  },
+  team: {
+    cats: [
+      {id:'venue', name:'团建场地 / 会议酒店', nameEn:'Team Building Venues', icon:'🏢', cls:'c-brand', desc:'具备宴会厅、会议室的酒店，适合大型团建。', descEn:'Hotels with banquet/meeting rooms for team events.'},
+      {id:'entertainment', name:'KTV / 娱乐聚会', nameEn:'KTV & Entertainment', icon:'🎤', cls:'c-amber', desc:'KTV、居酒屋，适合团队欢乐时光。', descEn:'KTV and fun entertainment for team outings.'},
+      {id:'diy', name:'创意手作 / DIY', nameEn:'DIY Workshops', icon:'🎨', cls:'c-emerald', desc:'陶艺、拼豆、玻璃工坊，解压又有趣。', descEn:'Pottery, Perler beads and glass DIY for creative teams.'},
+      {id:'dining', name:'团建餐厅 / 宴请', nameEn:'Team Dining', icon:'🍽️', cls:'c-amber', desc:'设有包间、适合团队聚餐的精选餐厅。', descEn:'Restaurants with private rooms for team meals and banquets.'}
+    ],
+    filter: function(t, id){
+      if(id==='venue') return true;
+      if(id==='entertainment') return t.category==='娱乐聚会';
+      if(id==='diy') return t.category==='创意手作';
+      if(id==='dining') return !!t.teamBuilding;
+      return false;
+    }
+  }
+};
+
+var DATASETS = { hotel: HOTELS, dining: RESTAURANTS, fun: FUN_SPOTS, team: TEAM_BUILDING };
+var RENDERERS = { hotel: renderHotel, dining: renderRestaurant, fun: renderFun, team: renderTeam };
+
+function buildPane(tabId) {
   var el = document.getElementById('pane-' + tabId);
   el.innerHTML = '';
+  var cfg = I18N_CATS[tabId];
   cfg.cats.forEach(function(catCfg) {
+    // 团建的娱乐/DIY子分类从 FUN_SPOTS 取数据，渲染用 renderFun
+    var dataset, renderFn;
+    if (tabId === 'team' && (catCfg.id === 'entertainment' || catCfg.id === 'diy')) {
+      dataset = FUN_SPOTS;
+      renderFn = RENDERERS['fun'];
+    } else if (tabId === 'team' && catCfg.id === 'dining') {
+      dataset = RESTAURANTS;
+      renderFn = RENDERERS['dining'];
+    } else {
+      dataset = DATASETS[tabId];
+      renderFn = RENDERERS[tabId];
+    }
     var items = dataset.filter(function(d){ return cfg.filter(d, catCfg.id) && matches(d); });
     var isOpen = expandedCat[tabId] === catCfg.id;
     var card = document.createElement('div');
     card.className = 'cat-card';
     var catLabel = (lang==='en') ? catCfg.nameEn : catCfg.name;
     var catDesc  = (lang==='en') ? catCfg.descEn : catCfg.desc;
-    var noRes = (lang==='en') ? 'No results' : '暂无匹配结果';
     var itemWord = (lang==='en') ? ' items' : ' 个推荐';
     card.innerHTML =
       '<div class="cat-hd ' + catCfg.cls + '" onclick="toggleCat(\'' + tabId + '\',\'' + catCfg.id + '\')">' +
@@ -573,22 +470,17 @@ function buildPane(tabId, cfg, dataset, renderFn) {
         (isOpen ? '<div class="cat-desc">' + esc(catDesc) + '</div>' : '') +
       '</div>' +
       '<div class="item-list' + (isOpen?' open':'') + '" id="list-' + tabId + '-' + catCfg.id + '">' +
-        (items.length ? items.map(renderFn).join('') : '<div class="empty">' + noRes + '</div>') +
+        (items.length ? items.map(renderFn).join('') : '<div class="empty">暂无匹配结果</div>') +
       '</div>';
     el.appendChild(card);
   });
 }
 
 function rebuild() {
-  var cfg = I18N.zh;
-  buildPane('hotel', cfg.hotel, HOTELS, renderHotel);
-  buildPane('dining', cfg.dining, RESTAURANTS, renderRestaurant);
-  buildPane('fun', cfg.fun, FUN_SPOTS, renderFun);
-  buildPane('team', cfg.team, TEAM_BUILDING, renderTeam);
+  ['hotel','dining','fun','team'].forEach(buildPane);
 }
 
 function toggleCat(tabId, catId) {
-  // close all in this tab
   document.querySelectorAll('[id^="list-' + tabId + '-"]').forEach(function(el){ el.classList.remove('open'); });
   document.querySelectorAll('[id^="arr-' + tabId + '-"]').forEach(function(el){ el.classList.remove('open'); });
   if (expandedCat[tabId] === catId) {
@@ -600,7 +492,6 @@ function toggleCat(tabId, catId) {
     if (list) list.classList.add('open');
     if (arr)  arr.classList.add('open');
   }
-  // re-render to update desc visibility
   rebuild();
 }
 
@@ -618,14 +509,8 @@ function toggleLang() {
   document.getElementById('hd-title').textContent = lang==='zh' ? 'IEG Global · 企鹅岛生活指南' : 'IEG Global · Penguin Island Guide';
   document.getElementById('hd-sub').textContent = lang==='zh' ? '入驻企鹅岛，开启高效生活新篇章' : 'Your complete guide to living & working on Penguin Island';
   document.getElementById('searchInput').placeholder = lang==='zh' ? '搜索名称、地点或类别...' : 'Search name, location or category...';
-  document.getElementById('ft-tip').textContent = lang==='zh' ? '✅ 点击卡片跳转大众点评 / 必应搜索查看详情' : '✅ Click any card to search on Dianping / Bing';
-  document.getElementById('ft-copy').textContent = lang==='zh' ? 'IEG Global · 企鹅岛入驻专属指南 | 2026年3月' : 'IEG Global · Penguin Island Exclusive Guide | March 2026';
-  var tabLabels = {
-    zh: ['酒店住宿','餐饮美食','休闲娱乐','会议团建'],
-    en: ['Hotels','Dining','Leisure','Team Building']
-  };
-  var tabIds = ['hotel','dining','fun','team'];
-  tabIds.forEach(function(id, i) {
+  var tabLabels = { zh: ['酒店住宿','餐饮美食','休闲娱乐','会议团建'], en: ['Hotels','Dining','Leisure','Team Building'] };
+  ['hotel','dining','fun','team'].forEach(function(id, i) {
     var btn = document.querySelector('[onclick*="\'' + id + '\'"]');
     if (btn) btn.querySelector('.tab-lbl').textContent = tabLabels[lang][i];
   });
@@ -635,7 +520,6 @@ function toggleLang() {
 function doSearch() {
   searchQ = document.getElementById('searchInput').value;
   rebuild();
-  // auto-expand cats with results when searching
   if (searchQ) {
     ['hotel','dining','fun','team'].forEach(function(tabId) {
       document.querySelectorAll('[id^="list-' + tabId + '-"]').forEach(function(el) {
@@ -650,7 +534,6 @@ function doSearch() {
   }
 }
 
-// init
 rebuild();
 </script>
 </body>
