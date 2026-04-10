@@ -88,6 +88,8 @@ body{background:var(--bg);font-family:-apple-system,'PingFang SC','Helvetica Neu
 .contact-card:hover{box-shadow:0 4px 18px rgba(79,70,229,.09)}
 .cc-name{font-weight:800;color:var(--brand);font-size:.88em;margin-bottom:5px}
 .cc-desc{font-size:.81em;color:var(--text-2);line-height:1.65;white-space:pre-wrap}
+.cc-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.cc-tag{font-size:.75em;background:#ede9fe;color:#5b21b6;border-radius:20px;padding:3px 10px;white-space:nowrap}
 
 /* ── Links grid ── */
 .links-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
@@ -254,9 +256,10 @@ var SECTIONS = [
       {
         q: { zh: '🗺️ 园区长什么样？平面图在哪里？', en: '🗺️ What does the campus look like? Where is the floor plan?' },
         steps: [
-          { zh: '腾讯总部园区（Tencent Headquarters Campus）涵盖云海大厦1–6栋、腾云中心A/B/C/D座，以及企鹅公寓、明湾学校、昀湾文体中心等配套设施', en: 'Tencent Headquarters Campus includes Buildings 1–6 of Yunhai Tower, Towers A/B/C/D of Tengyun Center, plus Penguin Apartments, Mingwan School, Yunwan Cultural & Sports Center and more.' },
+          { zh: '腾讯总部园区（Tencent Headquarters Campus）涵盖云海大厦1–6栋、腾云中心A/B/C座，以及企鹅公寓、明湾学校、昀湾文体中心等配套设施', en: 'Tencent Headquarters Campus includes Buildings 1–6 of Yunhai Tower, Towers A/B/C of Tengyun Center, plus Penguin Apartments, Mingwan School, Yunwan Cultural & Sports Center and more.' },
           { zh: '我们在 <strong>云海大厦3栋（Building 3, Yunhai Tower）</strong>，地址：广东省深圳市宝安区西乡街道 云海大厦3栋', en: 'Our office is in <strong>Building 3, Yunhai Tower</strong>, Xixiang Subdistrict, Baoan District, Shenzhen.' },
-          { zh: '园区平面图 👇（含各出入口、楼梯位置）', en: 'Campus floor plan 👇 (including entrances and stairwells)' }
+          { zh: '园区平面图 👇（含各出入口、楼梯位置）', en: 'Campus floor plan 👇 (including entrances and stairwells)' },
+          { zh: '总部园区介绍 → <a href="https://km.woa.com/group/52984/articles/show/604706" target="_blank">查看详情</a>', en: 'HQ Campus Introduction → <a href="https://km.woa.com/group/52984/articles/show/604706" target="_blank">View Details</a>' }
         ],
         imgs: [
           { src:'campus-map.png' },
@@ -267,7 +270,9 @@ var SECTIONS = [
         q: { zh: '🛍️ 园区周边有哪些商业配套？', en: '🛍️ What amenities and shops are near the campus?' },
         steps: [
           { zh: '查看园区商业配套指引（餐饮、便利店、健身等）→ <a href="https://km.woa.com/group/52984/articles/show/617474?kmref=group_index" target="_blank">园区商业配套</a>', en: 'Check the campus amenities guide (dining, convenience stores, gym, etc.) → <a href="https://km.woa.com/group/52984/articles/show/617474?kmref=group_index" target="_blank">Campus Amenities Guide</a>' },
-          { zh: '周边餐饮、住宿、团建场地也可以参考企鹅岛周边指引（见上方入口）', en: 'For dining, stays, and team building, also check the Penguin Island Neighborhood Guide above.' }
+          { zh: '周边餐饮、住宿、团建场地也可以参考企鹅岛周边指引（见上方入口）', en: 'For dining, stays, and team building, also check the Penguin Island Neighborhood Guide above.' },
+          { zh: '🏋️ <strong>健身房：</strong>云海1栋4楼 / 云海2栋10楼 / <a href="https://km.woa.com/group/52984/articles/show/609615?kmref=group_index" target="_blank">昀湾文体中心</a>', en: '🏋️ <strong>Gym:</strong> Yunhai Tower 1 – Floor 4 / Yunhai Tower 2 – Floor 10 / <a href="https://km.woa.com/group/52984/articles/show/609615?kmref=group_index" target="_blank">Yunwan Cultural & Sports Center</a>' },
+          { zh: '🍱 <strong>园区食堂：</strong>云海1栋1F–3F / 云海2栋&腾云C座B1 / 腾云A座G层（已开放）/ 腾云B座G层（暂未开放）。具体菜单可参考 Tencent Home → 鹅厂生活 → 今日菜单', en: '🍱 <strong>Campus Canteens:</strong> Yunhai 1 – 1F–3F / Yunhai 2 & Tengyun C – B1 / Tengyun A – G (open) / Tengyun B – G (not yet open). Check today\'s menu: Tencent Home → Campus Life → Today\'s Menu' }
         ]
       },
       {
@@ -325,12 +330,20 @@ var SECTIONS = [
     },
     contacts: [
       {
-        zh: { name: '连线财经1-8003（合同 / 用章 / 凭证）', desc: '企业微信搜索「连线财经1-8003」\n\n📌 适用场景：需要合同盖章、合同交取 / 归档 / 借阅、查询印章所在地、凭证借阅' },
-        en: { name: 'Finance 1-8003 (Contracts / Seals / Vouchers)', desc: 'WeCom: "Lianjie Finance 1-8003"\n\n📌 Use for: Contract stamping, filing, archival & retrieval; seal location queries; voucher borrowing.' },
+        zh: { name: '连线财经1-8003（对外付款）', desc: '企业微信搜索「连线财经1-8003」\n\n📌 欢迎随时咨询，服务内容：' },
+        en: { name: 'Finance 1-8003 (External Payments)', desc: 'WeCom: "Lianjie Finance 1-8003"\n\n📌 Feel free to reach out anytime. Services:' },
+        tags: {
+          zh: ['单据查询', '对外付款', '通讯/交通补助', '其他报销', '发票咨询', '部门经费', '备用金'],
+          en: ['Document queries', 'External payments', 'Comms/transport allowance', 'Other reimbursements', 'Invoice enquiries', 'Dept budget', 'Petty cash']
+        },
       },
       {
         zh: { name: '连线财经3-8003（报销专线）', desc: '企业微信搜索「连线财经3-8003」\n\n📌 适用场景：报销问题咨询、提单前确认签约主体\n⚠️ 提报销单之前，记得先联系小T确认签约主体，填正确的发票抬头，避免退单！' },
         en: { name: 'Finance 3-8003 (Reimbursement Hotline)', desc: 'WeCom: "Lianjie Finance 3-8003"\n\n📌 Use for: Reimbursement questions, confirming legal entity before submission\n⚠️ Before submitting, confirm entity with 小T and use the correct invoice header to avoid rejections!' },
+      },
+      {
+        zh: { name: '连线财经2-8003（深圳合同公章）', desc: '企业微信搜索「连线财经2-8003」\n\n📌 适用场景：深圳合同公章盖章、合同归档相关事宜' },
+        en: { name: 'Finance 2-8003 (Shenzhen Contract Seals)', desc: 'WeCom: "Lianjie Finance 2-8003"\n\n📌 Use for: Shenzhen contract stamping and archival.' },
       }
     ],
     scenarios: [
@@ -350,7 +363,11 @@ var SECTIONS = [
             '腾讯科技（深圳）有限公司　｜　税号：9144030071526726XG',
             '比邻星科技（深圳）有限公司　｜　税号：91440300MA5GG16Y7K',
             '腾讯科技（上海）有限公司　｜　税号：913100006778230255',
-          ]
+          ],
+          remark: {
+            zh: '💡 <strong>用哪个抬头？简单记一下：</strong><br>• 差旅相关报销 → 用你自己的<strong>签约主体抬头</strong>（不确定的话，问小T就知道啦）<br>• 部门聚餐、团建、下午茶等部门经费 → <strong>腾讯科技（深圳）有限公司</strong><br>• 极特殊情况 → <strong>腾讯科技（上海）有限公司</strong><br>• 还是拿不准？联系<strong>秘书mm</strong>确认一下，填对了才不会被退单哦 😊',
+            en: '💡 <strong>Which header to use? Quick guide:</strong><br>• Business travel → your own <strong>legal entity header</strong> (ask 小T if unsure)<br>• Dept expenses (team dinners, team building, etc.) → <strong>Tencent Technology (Shenzhen)</strong><br>• Special cases → <strong>Tencent Technology (Shanghai)</strong><br>• Still not sure? Check with your <strong>secretary</strong> to avoid rejections 😊'
+          }
         }
       },
       {
@@ -416,10 +433,11 @@ var SECTIONS = [
         }
       },
       {
-        q: { zh: '📜 我需要盖合同章 / 借阅凭证，找谁？', en: '📜 I need a contract stamped or want to borrow vouchers — who do I contact?' },
+        q: { zh: '📜 我需要盖合同章 / 申请公章，找谁？', en: '📜 I need a contract stamped or want to apply for a seal — who do I contact?' },
         steps: [
-          { zh: '企业微信搜索 <strong>「连线财经1-8003」</strong>，说明你的需求即可', en: 'WeCom search <strong>"Lianjie Finance 1-8003"</strong> and describe your request.' },
-          { zh: '可以处理：合同盖章、合同交取/归档/借阅、印章位置查询、凭证借阅', en: 'They handle: contract stamping, filing, archival & retrieval, seal location queries, voucher borrowing.' },
+          { zh: '🖋️ <strong>网站申请盖公章</strong> → <a href="http://seal.woa.com/web/#/Home" target="_blank">seal.woa.com</a>', en: '🖋️ <strong>Apply for a seal online</strong> → <a href="http://seal.woa.com/web/#/Home" target="_blank">seal.woa.com</a>' },
+          { zh: '📱 <strong>手机端申请</strong>：微信腾讯企业号 → 财经助手 → 常用 → 移动印章', en: '📱 <strong>Mobile application</strong>: WeChat Tencent Enterprise → Finance Assistant → Common → Mobile Seal' },
+          { zh: '❓ 如有疑问，请联系企业微信 <strong>「连线财经2-8003」</strong>（深圳合同公章盖章归档）', en: '❓ For questions, contact WeCom <strong>"Lianjie Finance 2-8003"</strong> (Shenzhen contract stamping & archival).' },
           { zh: '更多操作参考 → <a href="https://iwiki.woa.com/space/8003" target="_blank">8003 知识库</a>', en: 'More details → <a href="https://iwiki.woa.com/space/8003" target="_blank">8003 Knowledge Base</a>.' },
         ]
       },
@@ -447,6 +465,7 @@ var SECTIONS = [
         q: { zh: '🔧 我的工位 / 设备坏了，怎么报修？', en: '🔧 Something at my workstation is broken — how do I report it?' },
         steps: [
           { zh: '企业微信搜索 <strong>「7000」</strong>，描述一下问题（什么设备、哪里坏了、工位在哪）', en: 'WeCom search <strong>"7000"</strong> and describe the issue (what broke, where it is, your workstation location).' },
+          { zh: '也可以直接<strong>扫工位上的二维码</strong>反馈，快捷提交报修', en: 'Or scan the <strong>QR code on your workstation</strong> to submit a repair request quickly.' },
           { zh: '涵盖范围：办公桌椅、灯、空调、打印机等日常办公环境', en: 'Covers: desks & chairs, lights, AC, printers, and general office environment.' },
           { zh: '也可以访问 <a href="https://adm.woa.com/adm/" target="_blank">行政门户</a> 自助提交工单', en: 'Or self-submit a ticket via the <a href="https://adm.woa.com/adm/" target="_blank">Admin Portal</a>.' }
         ]
@@ -473,6 +492,10 @@ var SECTIONS = [
       en: { title: '👥 HR Questions? 小T Is Your Go-To', desc: 'Onboarding, leave, payroll, insurance — anything people-related, 小T has the answers.' }
     },
     contacts: [
+      {
+        zh: { name: '部门 HRBP', desc: '有比较特殊的问题或个人问题，欢迎联系你所在部门的 HRBP 寻求支持 😊\n\n📌 适用场景：个人职业发展咨询、组织架构相关问题、特殊情况处理等较为敏感或复杂的 HR 事务' },
+        en: { name: 'Department HRBP', desc: 'For special or personal issues, feel free to reach out to your department\'s HRBP for support 😊\n\n📌 Use for: Personal career development, org structure questions, sensitive or complex HR matters.' },
+      },
       {
         zh: { name: '小T（连线HR）', desc: '企业微信搜索「小T」\n\n📌 适用场景：商业保险咨询、考勤/假期问题、入职相关事宜、社保查询、薪酬发放问题' },
         en: { name: '小T (HR Contact)', desc: 'WeCom: "小T"\n\n📌 Use for: Business insurance, attendance & leave, onboarding, social insurance, payroll and other HR matters.' },
@@ -734,7 +757,10 @@ function buildContent(){
     h += '<div class="block">';
     h += '<div class="block-label"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>'+(lang==='zh'?'企业微信联系方式':'WeCom Contacts')+'</div>';
     sec.contacts.forEach(function(c){
-      h += '<div class="contact-card"><div class="cc-name">'+esc(t(c,'name'))+'</div><div class="cc-desc">'+esc(t(c,'desc'))+'</div></div>';
+      h += '<div class="contact-card"><div class="cc-name">'+esc(t(c,'name'))+'</div><div class="cc-desc">'+esc(t(c,'desc'))+'</div>';
+      var tags = c.tags ? (lang==='en' ? c.tags.en : c.tags.zh) : null;
+      if(tags && tags.length){ h += '<div class="cc-tags">'; tags.forEach(function(tag){ h += '<span class="cc-tag">'+esc(tag)+'</span>'; }); h += '</div>'; }
+      h += '</div>';
     });
     h += '</div>';
   }
@@ -834,6 +860,10 @@ function buildContent(){
           var noteTitle = lang==='en' ? n.en : n.zh;
           h += '<div class="note-box"><div class="note-title">'+esc(noteTitle)+'</div>';
           n.rows.forEach(function(r){ h += '<div class="note-row">'+esc(r)+'</div>'; });
+          if(n.remark){
+            var remarkText = lang==='en' ? n.remark.en : n.remark.zh;
+            h += '<div class="note-row" style="border-bottom:none;padding-top:8px;white-space:pre-wrap">'+remarkText+'</div>';
+          }
           h += '</div>';
         }
       }
