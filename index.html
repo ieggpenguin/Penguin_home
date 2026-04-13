@@ -84,9 +84,9 @@ main{max-width:1100px;margin:0 auto;padding:20px}
 .ia-nav{background:#f0fdf4;color:#059669}
 .ia-nav:hover{background:#059669;color:white}
 .ia-dp{background:#fff7ed;color:#b45309}
-.ia-ctrip{background:#e6f7f5;color:#00897b}
-.ia-ctrip:hover{background:#00897b;color:white}
 .ia-dp:hover{background:#b45309;color:white}
+.ia-search{background:#eff6ff;color:#2563eb}
+.ia-search:hover{background:#2563eb;color:white}
 
 /* ── Footer ── */
 footer{max-width:1100px;margin:16px auto 40px;text-align:center;color:#94a3b8;font-size:.77em;padding:0 20px}
@@ -140,7 +140,7 @@ footer{max-width:1100px;margin:16px auto 40px;text-align:center;color:#94a3b8;fo
 </main>
 
 <footer>
-  <p id="ft-tip">✅ 酒店/团建 → 必应搜索 · 餐饮/娱乐 → 大众点评 · 🧭 导航由企鹅岛出发</p>
+  <p id="ft-tip">🔎 所有模块均跳转必应搜索 · 🧭 导航由企鹅岛出发</p>
   <p style="margin-top:5px" id="ft-copy">IEG Global · 企鹅岛入驻专属指南 | 2026年3月</p>
 </footer>
 
@@ -265,13 +265,13 @@ var currentTab = 'hotel';
 var expandedCat = {hotel: null, dining: null, fun: null, team: null};
 var searchQ = '';
 
-// 大众点评 PC 搜索（深圳城市码=7，稳定可用）
-// 百度搜索 酒店名+携程
-function ctripUrl(name) { return 'https://www.baidu.com/s?wd=' + encodeURIComponent(name + ' 携程'); }
-function dpUrl(name)   { return 'https://www.dianping.com/search/keyword/7/0_' + encodeURIComponent(name); }
-function bingUrl(name) { return 'https://www.dianping.com/search/keyword/7/0_' + encodeURIComponent(name); }
-function funUrl(name)  { return 'https://www.dianping.com/search/keyword/7/0_' + encodeURIComponent(name); }
-function teamUrl(name) { return 'https://www.dianping.com/search/keyword/7/0_' + encodeURIComponent(name); }
+// 全部使用必应搜索
+function bingSearchUrl(name) { return 'https://www.bing.com/search?q=' + encodeURIComponent(name + ' 深圳'); }
+function ctripUrl(name) { return bingSearchUrl(name); }
+function dpUrl(name)   { return bingSearchUrl(name); }
+function bingUrl(name) { return bingSearchUrl(name); }
+function funUrl(name)  { return bingSearchUrl(name); }
+function teamUrl(name) { return bingSearchUrl(name); }
 
 // 腾讯地图 - 导航（从企鹅岛出发，含精确坐标时更准）
 function txNavUrl(name, toLat, toLng) {
@@ -326,7 +326,7 @@ function renderHotel(h) {
       '<span>🚗 ' + esc(dist(h)) + '</span>' +
       '<span class="meta-full">💴 ¥' + esc(h.price) + '</span>' +
     '</div>' +
-    actionBtns(h.name, ctripUrl(h.name), '🏨 携程预订', 'ia-ctrip') +
+    actionBtns(h.name, ctripUrl(h.name), '🔎 必应搜索', 'ia-search') +
   '</div>';
 }
 
@@ -344,7 +344,7 @@ function renderRestaurant(r) {
       '<span>🚗 ' + esc(dist(r)) + '</span>' +
       (rooms(r) ? '<span class="meta-full">🚪 包间: ' + esc(rooms(r)) + '</span>' : '') +
     '</div>' +
-    actionBtns(r.name, dpUrl(r.name), '📖 点评') +
+    actionBtns(r.name, dpUrl(r.name), '🔎 必应搜索', 'ia-search') +
   '</div>';
 }
 
@@ -357,7 +357,7 @@ function renderFun(s) {
       '<span>📍 ' + esc(loc(s)) + '</span>' +
       '<span>🚗 ' + esc(dist(s)) + '</span>' +
     '</div>' +
-    actionBtns(s.name, funUrl(s.name), '🔍 搜索') +
+    actionBtns(s.name, funUrl(s.name), '🔎 必应搜索', 'ia-search') +
   '</div>';
 }
 
@@ -373,7 +373,7 @@ function renderTeam(t) {
       '<span>📍 ' + esc(loc(t)) + '</span>' +
       '<span>🚗 ' + esc(dist(t)) + '</span>' +
     '</div>' +
-    actionBtns(t.name, teamUrl(t.name), '🔍 搜索') +
+    actionBtns(t.name, teamUrl(t.name), '🔎 必应搜索', 'ia-search') +
   '</div>';
 }
 
