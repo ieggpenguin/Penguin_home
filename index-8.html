@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>团建目的地投票 · 五岛清新游</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" />
+  <link rel="stylesheet" href="./style.css" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cream: '#FFF8EE',
+            mint: '#A8DCC6',
+            mintDeep: '#6FBF9B',
+            sun: '#FFC773',
+            sunDeep: '#F39A4A',
+            coral: '#FF8A6B',
+            sky: '#9BD3E8',
+            inkSoft: '#3E4A45'
+          },
+          fontFamily: {
+            display: ['"Noto Serif SC"', 'serif'],
+            body: ['"Noto Sans SC"', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body class="font-body bg-cream text-inkSoft">
+
+  <!-- 顶部导航 -->
+  <header class="sticky top-0 z-40 backdrop-blur-md bg-cream/80 border-b border-mint/30">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <span class="w-9 h-9 rounded-full bg-mint/40 flex items-center justify-center text-xl">🥥</span>
+        <div>
+          <h1 class="font-display text-lg font-bold leading-none">五岛巡礼</h1>
+          <p class="text-xs text-mintDeep">Team Trip · 团建目的地投票</p>
+        </div>
+      </div>
+      <nav class="hidden md:flex items-center gap-7 text-sm">
+        <a href="#phuquoc" class="hover:text-coral transition">富国岛</a>
+        <a href="#okinawa" class="hover:text-coral transition">冲绳岛</a>
+        <a href="#chiangmai" class="hover:text-coral transition">清迈</a>
+        <a href="#phuket" class="hover:text-coral transition">普吉岛</a>
+        <a href="#bali" class="hover:text-coral transition">巴厘岛</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 -z-10">
+      <div class="absolute top-10 left-10 w-72 h-72 bg-mint/30 rounded-full blur-3xl"></div>
+      <div class="absolute bottom-0 right-10 w-80 h-80 bg-sun/30 rounded-full blur-3xl"></div>
+      <div class="absolute top-40 right-1/3 w-60 h-60 bg-coral/20 rounded-full blur-3xl"></div>
+    </div>
+    <div class="max-w-7xl mx-auto px-6 pt-16 pb-20 text-center">
+      <p class="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-white/60 border border-mint/40 text-sm text-mintDeep mb-6">
+        <i class="ri-sparkling-2-line"></i> 4-5 天 · 海岛 / 古城 · 五选一投票
+      </p>
+      <h2 class="font-display text-4xl md:text-6xl font-bold leading-tight mb-5">
+        给夏天一个 <span class="text-coral">出口</span><br/>
+        给团队一段 <span class="text-mintDeep">清新</span>的回忆
+      </h2>
+      <p class="max-w-2xl mx-auto text-base md:text-lg text-inkSoft/70 mb-8">
+        我们挑了 5 个风格各异的目的地，每个都能在 4~5 天里玩得尽兴。
+        看看图片、读读特色、对一对预算，选出你心里那个🥇。
+      </p>
+      <div class="flex flex-wrap justify-center gap-3">
+        <a href="#cards" class="px-6 py-3 rounded-full bg-coral text-white font-medium shadow-lg shadow-coral/30 hover:-translate-y-0.5 transition">
+          <i class="ri-map-pin-line mr-1"></i> 浏览方案
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 方案卡片对比 -->
+  <main id="cards" class="max-w-7xl mx-auto px-6 pb-12 space-y-16">
+
+    <!-- 富国岛 -->
+    <section id="phuquoc" class="island-card grid md:grid-cols-5 gap-8 items-center">
+      <div class="md:col-span-3 order-2 md:order-1">
+        <div class="flex items-center gap-3 mb-3">
+          <span class="badge bg-mint/30 text-mintDeep">越南 · 性价比之选</span>
+          <span class="badge bg-cream border border-sun/40 text-sunDeep">🌴 慵懒海岛</span>
+        </div>
+        <h3 class="font-display text-3xl md:text-4xl font-bold mb-3">富国岛 <span class="text-base font-normal text-inkSoft/50">Phú Quốc</span></h3>
+        <p class="leading-relaxed text-inkSoft/80 mb-4">
+          越南最大的离岛，也是公认的"小马代"。这里没有过度商业化的喧嚣，
+          细白沙滩、椰林木屋、星罗棋布的小渔村是它最迷人的样子。
+          4~5 天可以慢慢感受 <b class="text-coral">长滩日落</b>、跨海缆车直达 <b class="text-coral">香岛 Sun World</b> 玩水上乐园，
+          再去 <b class="text-coral">夜市</b> 吃一顿便宜到惊喜的海鲜，回程顺便挑两瓶鱼露和胡椒。
+          整体节奏松弛、消费低，非常适合"只想躺平不想做攻略"的团队。
+        </p>
+        <div class="grid grid-cols-3 gap-3 mb-5">
+          <div class="info-pill"><i class="ri-time-line"></i> 4-5 天</div>
+          <div class="info-pill"><i class="ri-plane-line"></i> 直飞 ~4h</div>
+          <div class="info-pill"><i class="ri-wallet-3-line"></i> 人均 ¥3500-4500</div>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <span class="tag">🏖️ 长滩日落</span>
+          <span class="tag">🚡 跨海缆车</span>
+          <span class="tag">🦐 海鲜夜市</span>
+          <span class="tag">🌊 水上乐园</span>
+        </div>
+      </div>
+      <div class="md:col-span-2 order-1 md:order-2 grid grid-cols-2 gap-3">
+        <img src="https://zhiyan-ai-agent-with-1258344702.cos.ap-guangzhou.tencentcos.cn/with/e30ad678-e901-4581-8610-141667ff1133/image_1779094918_3_1.jpg" class="island-img col-span-2 aspect-[16/9]" alt="富国岛海滩"/>
+        <img src="https://zhiyan-ai-agent-with-1258344702.cos.ap-guangzhou.tencentcos.cn/with/7ecd1384-3f70-42f5-8994-bd973ad6eb6c/image_1779094918_1_1.jpg" class="island-img aspect-[4/3]" alt="富国岛沙滩"/>
+        <img src="https://zhiyan-ai-agent-with-1258344702.cos.ap-guangzhou.tencentcos.cn/with/467fa040-9782-496a-b55f-802783e2f641/image.png" class="island-img aspect-[4/3]" alt="富国岛日落椰林"/>
+      </div>
+    </section>
+
+    <!-- 冲绳岛 -->
+    <section id="okinawa" class="island-card grid md:grid-cols-5 gap-8 items-center">
+      <div class="md:col-span-2 grid grid-cols-2 gap-3">
+        <img src="https://zhiyan-ai-agent-with-1258344702.cos.ap-guangzhou.tencentcos.cn/with/9ebc553f-ac13-4d2c-80cf-6d1ff7526cfc/image.png" class="island-img col-span-2 aspect-[16/9]" alt="冲绳首里城"/>
+        <img src="https://zhiyan-ai-agent-with-1258344702.cos.ap-guangzhou.tencentcos.cn/with/21d68e14-e0ac-488f-971d-df51a40214e1/image_1779094926_1_1.jpg" class="island-img aspect-[4/3]" alt="渡嘉敷岛"/>
+        <img src="https://zhiyan-ai-agent-with-1258344702.cos.ap-guangzhou.tencentcos.cn/with/da5d0569-1789-4306-8725-3a9a7781fa23/image_1779094926_3_1.jpg" class="island-img aspect-[4/3]" alt="冲绳度假"/>
+      </div>
+      <div class="md:col-span-3">
+        <div class="flex items-center gap-3 mb-3">
+          <span class="badge bg-sky/40 text-sky-700">日本 · 精致洁净</span>
+          <span class="badge bg-cream border border-mint/40 text-mintDeep">🐠 浮潜天堂</span>
+        </div>
+        <h3 class="font-display text-3xl md:text-4xl font-bold mb-3">冲绳 <span class="text-base font-normal text-inkSoft/50">Okinawa</span></h3>
+        <p class="leading-relaxed text-inkSoft/80 mb-4">
+          被称为"日本的夏威夷"，海水通透得像泡在玻璃里。
+          这里既有 <b class="text-coral">美丽海水族馆</b> 的鲸鲨震撼，也有 <b class="text-coral">古宇利岛</b>、<b class="text-coral">残波岬</b> 这样的纯净海角。
+          4~5 天足够自驾环岛一圈，白天浮潜、SUP，傍晚去 <b class="text-coral">国际通</b> 吃石垣牛烧肉、
+          来一杯 Orion 啤酒，节奏不紧不慢。日本的服务和卫生标准让团队体验非常舒适，
+          适合追求"清新治愈+不想踩坑"的同学。
+        </p>
+        <div class="grid grid-cols-3 gap-3 mb-5">
+          <div class="info-pill"><i class="ri-time-line"></i> 5 天</div>
+          <div class="info-pill"><i class="ri-plane-line"></i> 直飞 ~3h</div>
+          <div class="info-pill"><i class="ri-wallet-3-line"></i> 人均 ¥7000-8500</div>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <span class="tag">🐋 美丽海水族馆</span>
+          <span class="tag">🚗 环岛自驾</span>
+          <span class="tag">🥩 石垣牛烧肉</span>
+          <span class="tag">🤿 浮潜SUP</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 清迈 -->
+    <section id="chiangmai" class="island-card grid md:grid-cols-5 gap-8 items-center">
+      <div class="md:col-span-3 order-2 md:order-1">
+        <div class="flex items-center gap-3 mb-3">
+          <span class="badge bg-sun/30 text-sunDeep">泰国 · 古城慢调</span>
+          <span class="badge bg-cream border border-coral/40 text-coral">🐘 山林治愈</span>
+        </div>
+        <h3 class="font-display text-3xl md:text-4xl font-bold mb-3">清迈 <span class="text-base font-normal text-inkSoft/50">Chiang Mai</span></h3>
+        <p class="leading-relaxed text-inkSoft/80 mb-4">
+          唯一的非海岛选项，但清新值绝对在线。这里是泰北的"玫瑰之城"，
+          古城里 300 多座寺庙错落有致，节奏比曼谷慢一拍。
+          4~5 天可以去 <b class="text-coral">双龙寺</b> 俯瞰整座城、到 <b class="text-coral">大象保护营</b> 给小象洗澡、
+          钻进 <b class="text-coral">宁曼路</b> 一家家咖啡店打卡，再排一晚 <b class="text-coral">周日夜市</b> 把手作小物买回家。
+          消费低、出片率高、几乎没有团建吃苦的瞬间，喜欢慢节奏和小清新氛围的同学一定会爱上。
+        </p>
+        <div class="grid grid-cols-3 gap-3 mb-5">
+          <div class="info-pill"><i class="ri-time-line"></i> 5 天</div>
+          <div class="info-pill"><i class="ri-plane-line"></i> 直飞 ~4h</div>
+          <div class="info-pill"><i class="ri-wallet-3-line"></i> 人均 ¥3800-4500</div>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <span class="tag">🛕 双龙寺祈福</span>
+          <span class="tag">🐘 大象营互动</span>
+          <span class="tag">☕ 宁曼路咖啡</span>
+          <span class="tag">🛍️ 周日夜市</span>
+        </div>
+      </div>
+      <div class="md:col-span-2 order-1 md:order-2 grid grid-cols-2 gap-3">
+        <img src="https://zhiyan-ai-agent-with-1258344702.cos.ap-guangzhou.tencentcos.cn/with/2e500c65-415d-46da-bb65-33922658bda7/image.png" class="island-img col-span-2 aspect-[16/9]" alt="清迈白庙"/>
+        <img src="https://zhiyan-ai-agent-with-1258344702.cos.ap-guangzhou.tencentcos.cn/with/f2a7849c-c0cf-4772-9a35-82be5013eebb/image.png" class="island-img aspect-[4/3]" alt="清迈寺庙金佛"/>
+        <img src="https://zhiyan-ai-agent-with-1258344702.cos.ap-guangzhou.tencentcos.cn/with/bf4f9d76-3f9f-426d-aeef-7b5778138830/image.png" class="island-img aspect-[4/3]" alt="清迈夜色寺庙"/>
+      </div>
+    </section>
+
+    <!-- 普吉岛 -->
+    <section id="phuket" class="island-card grid md:grid-cols-5 gap-8 items-center">
+      <div class="md:col-span-2 grid grid-cols-2 gap-3">
+        <img src="https://zhiyan-ai-agent-with-1258344702.cos.ap-guangzhou.tencentcos.cn/with/b23150d2-c966-4556-9286-49786634cfdc/image_1779094943_2_1.png" class="island-img col-span-2 aspect-[16/9]" alt="普吉岛"/>
+        <img src="https://zhiyan-ai-agent-with-1258344702.cos.ap-guangzhou.tencentcos.cn/with/fe258b7d-ac21-472b-a180-40eb4ac0b494/image_1779094943_1_1.jpg" class="island-img aspect-[4/3]" alt="普吉海景"/>
+        <img src="https://zhiyan-ai-agent-with-1258344702.cos.ap-guangzhou.tencentcos.cn/with/79a2f3d8-c278-4d07-9fa5-9c1eaded55f2/image_1779096176_3_1.jpg" class="island-img aspect-[4/3]" alt="披披岛航拍"/>
+      </div>
+      <div class="md:col-span-3">
+        <div class="flex items-center gap-3 mb-3">
+          <span class="badge bg-coral/20 text-coral">泰国 · 经典之选</span>
+          <span class="badge bg-cream border border-sky/40 text-sky-700">🛥️ 跳岛玩家</span>
+        </div>
+        <h3 class="font-display text-3xl md:text-4xl font-bold mb-3">普吉岛 <span class="text-base font-normal text-inkSoft/50">Phuket</span></h3>
+        <p class="leading-relaxed text-inkSoft/80 mb-4">
+          泰国最大的海岛，玩法最丰富、配套最成熟、踩雷概率最低。
+          4~5 天的黄金组合通常是：一天 <b class="text-coral">PP 岛跳岛</b>（玛雅湾、蚊子岛浮潜），
+          一天 <b class="text-coral">斯米兰 / 蛋岛</b> 看透明海水，剩下时间去 <b class="text-coral">芭东海滩</b> 冲浪、
+          逛 <b class="text-coral">江西冷</b> 商圈和 <b class="text-coral">班赞海鲜市场</b>，晚上看一场 Simon 人妖秀。
+          海岛体验密度极高，团队里"想躺平"和"想嗨玩"的同学都能各得其所。
+        </p>
+        <div class="grid grid-cols-3 gap-3 mb-5">
+          <div class="info-pill"><i class="ri-time-line"></i> 5 天</div>
+          <div class="info-pill"><i class="ri-plane-line"></i> 直飞 ~5h</div>
+          <div class="info-pill"><i class="ri-wallet-3-line"></i> 人均 ¥4000-5500</div>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <span class="tag">🛥️ PP岛跳岛</span>
+          <span class="tag">🐠 斯米兰浮潜</span>
+          <span class="tag">🦞 班赞海鲜市场</span>
+          <span class="tag">🌃 芭东夜生活</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 巴厘岛 -->
+    <section id="bali" class="island-card grid md:grid-cols-5 gap-8 items-center">
+      <div class="md:col-span-3 order-2 md:order-1">
+        <div class="flex items-center gap-3 mb-3">
+          <span class="badge bg-mint/30 text-mintDeep">印尼 · 度假感顶配</span>
+          <span class="badge bg-cream border border-coral/40 text-coral">🌅 网红出片</span>
+        </div>
+        <h3 class="font-display text-3xl md:text-4xl font-bold mb-3">巴厘岛 <span class="text-base font-normal text-inkSoft/50">Bali</span></h3>
+        <p class="leading-relaxed text-inkSoft/80 mb-4">
+          众神之岛，把"度假感"三个字写满每一帧画面。
+          山城 <b class="text-coral">乌布</b> 有梯田、瑜伽和网红丛林秋千；
+          海边 <b class="text-coral">金巴兰</b> 是吃着海鲜看日落的浪漫现场；
+          <b class="text-coral">情人崖</b>、<b class="text-coral">海神庙</b>、<b class="text-coral">蓝梦岛</b> 串起一整条出片动线。
+          4~5 天可以同时拥有 SPA、火山、丛林和海岛，住一晚带泳池的别墅人均也不贵。
+          适合想要"高级感团建照"的团队，朋友圈直接收割一周点赞。
+        </p>
+        <div class="grid grid-cols-3 gap-3 mb-5">
+          <div class="info-pill"><i class="ri-time-line"></i> 5 天</div>
+          <div class="info-pill"><i class="ri-plane-line"></i> 直飞 ~6h</div>
+          <div class="info-pill"><i class="ri-wallet-3-line"></i> 人均 ¥5800-6800</div>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <span class="tag">🌾 乌布梯田</span>
+          <span class="tag">🌅 金巴兰日落</span>
+          <span class="tag">🛕 海神庙</span>
+          <span class="tag">🏊 泳池别墅</span>
+        </div>
+      </div>
+      <div class="md:col-span-2 order-1 md:order-2 grid grid-cols-2 gap-3">
+        <img src="https://zhiyan-ai-agent-with-1258344702.cos.ap-guangzhou.tencentcos.cn/with/3c955cf7-d904-4fb1-a966-38c68981167b/image_1779095843_1_1.jpg" class="island-img col-span-2 aspect-[16/9]" alt="巴厘岛海神庙日落"/>
+        <img src="https://zhiyan-ai-agent-with-1258344702.cos.ap-guangzhou.tencentcos.cn/with/28692cbf-e1d2-491e-8cf6-83373239799b/image_1779094971_1_1.png" class="island-img aspect-[4/3]" alt="巴厘秋千"/>
+        <img src="https://zhiyan-ai-agent-with-1258344702.cos.ap-guangzhou.tencentcos.cn/with/86ec500a-d29c-4871-8d36-81f8f262c58c/image_1779094965_1_1.jpg" class="island-img aspect-[4/3]" alt="巴厘海岛"/>
+      </div>
+    </section>
+
+    <!-- 一览表 -->
+    <section class="bg-white/70 backdrop-blur rounded-3xl p-6 md:p-8 border border-mint/30 shadow-sm">
+      <div class="flex items-center justify-between mb-5">
+        <h3 class="font-display text-2xl font-bold"><i class="ri-table-line text-mintDeep mr-2"></i>一图看完五个方案</h3>
+        <span class="text-xs text-inkSoft/50">按人均预算从低到高排序</span>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead class="text-mintDeep">
+            <tr class="border-b border-mint/30">
+              <th class="text-left py-3 px-2">目的地</th>
+              <th class="text-left py-3 px-2">关键词</th>
+              <th class="text-left py-3 px-2">天数</th>
+              <th class="text-left py-3 px-2">飞行</th>
+              <th class="text-left py-3 px-2">人均</th>
+              <th class="text-left py-3 px-2">适合</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-mint/20">
+            <tr><td class="py-3 px-2 font-medium">清迈 🛕</td><td class="px-2">古城/山林/慢生活</td><td class="px-2">5天</td><td class="px-2">~4h</td><td class="px-2 text-coral font-bold">¥3800-4500</td><td class="px-2">想松弛、爱慢调</td></tr>
+            <tr><td class="py-3 px-2 font-medium">富国岛 🌴</td><td class="px-2">小马代/夜市/性价比</td><td class="px-2">4-5天</td><td class="px-2">~4h</td><td class="px-2 text-coral font-bold">¥3500-4500</td><td class="px-2">只想躺平</td></tr>
+            <tr><td class="py-3 px-2 font-medium">普吉岛 🛥️</td><td class="px-2">跳岛/夜生活/海鲜</td><td class="px-2">5天</td><td class="px-2">~5h</td><td class="px-2 text-coral font-bold">¥4000-5500</td><td class="px-2">嗨玩派</td></tr>
+            <tr><td class="py-3 px-2 font-medium">巴厘岛 🌅</td><td class="px-2">乌布/秋千/度假感</td><td class="px-2">5天</td><td class="px-2">~6h</td><td class="px-2 text-coral font-bold">¥5800-6800</td><td class="px-2">出片党</td></tr>
+            <tr><td class="py-3 px-2 font-medium">冲绳 🐠</td><td class="px-2">浮潜/自驾/精致</td><td class="px-2">5天</td><td class="px-2">~3h</td><td class="px-2 text-coral font-bold">¥7000-8500</td><td class="px-2">不想踩坑</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-4 text-xs text-inkSoft/50">* 人均预算包含往返机票、4 星住宿（双人间均摊 4 晚）、当地餐食、市内交通与必去门票；未含个人购物、签证及小费。最终价格以出行月份和实际报价为准（5-6 月、9-10 月通常更便宜）。</p>
+    </section>
+
+    <!-- 投票区已移除：投票请在群里发起 -->
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="text-center py-10 text-sm text-inkSoft/60">
+    <p class="mb-2">🌿 愿这个夏天，团队一起把脚印留在某座岛上 🌿</p>
+    <p>由 <a href="https://with.woa.com/" style="color: #8A2BE2;" target="_blank">With</a> 通过自然语言生成</p>
+  </footer>
+
+</body>
+</html>
